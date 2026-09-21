@@ -58,7 +58,7 @@ export default function MarketRatesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <Link href="/" className="inline-flex items-center gap-2 text-black hover:text-slate-800 font-medium mb-4 transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,8 +66,8 @@ export default function MarketRatesPage() {
             </svg>
             Back to Home
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900">Market Rates</h1>
-          <p className="text-gray-600 mt-2">Get fair market prices based on real property data</p>
+          <h1 className="text-3xl font-bold text-slate-900">Market Rates</h1>
+          <p className="text-slate-600 mt-2">Get fair market prices based on real property data</p>
         </div>
       </div>
 
@@ -79,12 +79,12 @@ export default function MarketRatesPage() {
 
         {/* Price Trends Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Price Trends by Village</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Price Trends by Village</h2>
 
           {availableMouzas.length === 0 ? (
-            <div className="bg-white rounded-lg shadow p-8 text-center">
-              <p className="text-gray-600 mb-4">No villages with enough data yet</p>
-              <p className="text-sm text-gray-500">Add more properties to see market trends</p>
+            <div className="bg-white rounded-lg border border-slate-200 p-8 text-center">
+              <p className="text-slate-600 mb-4">No villages with enough data yet</p>
+              <p className="text-sm text-slate-500">Add more properties to see market trends</p>
               <Link href="/list-land" className="inline-block mt-4 bg-black hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium">
                 Add Property
               </Link>
@@ -95,11 +95,11 @@ export default function MarketRatesPage() {
               <div className="bg-white rounded-lg shadow p-4">
                 <div className="grid md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Village</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Select Village</label>
                     <select
                       value={selectedMauza}
                       onChange={(e) => setSelectedMauza(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                     >
                       <option value="">Choose a village...</option>
                       {availableMouzas.map((m) => (
@@ -111,11 +111,11 @@ export default function MarketRatesPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Land Type</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Land Type</label>
                     <select
                       value={selectedLandType}
                       onChange={(e) => setSelectedLandType(e.target.value as LandType)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                     >
                       <option value="Residential">Residential</option>
                       <option value="Commercial">Commercial</option>
@@ -133,22 +133,22 @@ export default function MarketRatesPage() {
 
         {/* Market Overview Table */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Market Overview by Village</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Market Overview by Village</h2>
 
           {mauzaStats.length === 0 ? (
             <div className="bg-white rounded-lg shadow p-8 text-center">
-              <p className="text-gray-600">No properties listed yet</p>
+              <p className="text-slate-600">No properties listed yet</p>
             </div>
           ) : (
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Village</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Properties</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Avg Total Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Avg Per Katha</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Village</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Properties</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Avg Total Price</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Avg Per Katha</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -158,17 +158,17 @@ export default function MarketRatesPage() {
                     .map((stat) => (
                       <tr key={stat.mauza} className="hover:bg-slate-50">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="font-semibold text-gray-900">{stat.mauza}</span>
+                          <span className="font-semibold text-slate-900">{stat.mauza}</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="inline-block bg-slate-100 text-slate-900 px-3 py-1 rounded-full text-sm font-medium border border-slate-300">
                             {stat.count} properties
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-gray-900 font-semibold">
+                        <td className="px-6 py-4 whitespace-nowrap text-slate-900 font-semibold">
                           {formatCurrency(stat.avgPrice)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-slate-600">
                           {formatCurrency(stat.avgPricePerKatha)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
