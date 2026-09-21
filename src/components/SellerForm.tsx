@@ -245,7 +245,7 @@ export const SellerForm = () => {
         <button
           onClick={handlePrevious}
           disabled={step === 1}
-          className="flex items-center gap-2 px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition"
+          className="flex items-center gap-2 px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white transition"
         >
           <ChevronLeft className="w-4 h-4" />
           Previous

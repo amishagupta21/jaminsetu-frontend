@@ -320,7 +320,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({ onSubmit, initialData }) => {
         <button
           onClick={() => setStep((s) => (s > 1 ? (s - 1 as any) : s))}
           disabled={step === 1}
-          className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Previous
         </button>

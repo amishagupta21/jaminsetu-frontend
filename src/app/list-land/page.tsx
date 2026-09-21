@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function ListLandPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
 
       <main className="w-full px-4 py-8">

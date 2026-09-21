@@ -74,7 +74,7 @@ export const DocumentChecklist: React.FC<DocumentChecklistProps> = ({ propertyId
 
   return (
     <div className="space-y-4">
-      <div className="bg-slate-50 rounded-lg p-4">
+      <div className="bg-white rounded-lg p-4">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-semibold text-slate-900">Document Verification Checklist</h3>
           <span className="text-sm text-slate-600">
@@ -98,7 +98,7 @@ export const DocumentChecklist: React.FC<DocumentChecklistProps> = ({ propertyId
             <div key={doc.type} className="border border-slate-200 rounded-lg overflow-hidden">
               <button
                 onClick={() => setExpandedDoc(isExpanded ? null : doc.type)}
-                className="w-full px-4 py-3 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-white transition-colors"
               >
                 <div className="flex items-center gap-3 flex-1">
                   <div className="text-2xl">
@@ -123,7 +123,7 @@ export const DocumentChecklist: React.FC<DocumentChecklistProps> = ({ propertyId
               </button>
 
               {isExpanded && (
-                <div className="px-4 py-4 bg-slate-50 border-t border-slate-200 space-y-3">
+                <div className="px-4 py-4 bg-white border-t border-slate-200 space-y-3">
                   {docStatus ? (
                     <div className="space-y-2">
                       <p className="text-sm text-slate-600">

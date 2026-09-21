@@ -37,7 +37,7 @@ const getTypeColor = (type: string) => {
     case "GovernmentOffice":
       return "bg-amber-50 text-amber-700 border-amber-200";
     default:
-      return "bg-slate-50 text-slate-700 border-slate-200";
+      return "bg-white text-slate-700 border-slate-200";
   }
 };
 

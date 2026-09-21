@@ -206,7 +206,7 @@ export const FilterSidebar = () => {
         filters.areaRange[0] > 0 || filters.areaRange[1] < 100 ||
         filters.priceRange[0] > 0 || filters.priceRange[1] < 15000000 ||
         filters.roadSurface.length > 0 || filters.verifiedOnly) && (
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 mt-4">
+        <div className="bg-white border border-slate-200 rounded-lg p-3 mt-4">
           <p className="text-sm font-semibold text-slate-900 mb-2">
             Active Filters
           </p>

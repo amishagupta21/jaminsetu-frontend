@@ -96,7 +96,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
           {rows.map((row, idx) => (
             <tr
               key={row.key}
-              className={`border-b border-slate-200 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
+              className={`border-b border-slate-200 ${idx % 2 === 0 ? "bg-white" : "bg-white"}`}
             >
               <td className="px-4 py-3 text-sm font-semibold text-slate-900 bg-white sticky left-0">
                 {row.label}

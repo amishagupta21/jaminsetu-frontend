@@ -20,7 +20,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, showCompar
       1: { label: "Tier 1: Pending", color: "bg-slate-200 text-slate-800" },
       2: { label: "Tier 2: In Progress", color: "bg-slate-300 text-slate-900" },
       3: { label: "Tier 3: Verified", color: "bg-slate-400 text-slate-900" },
-      4: { label: "Tier 4: Full Search", color: "bg-slate-500 text-white" },
+      4: { label: "Tier 4: Full Search", color: "bg-white0 text-white" },
     };
     return tiers[tier as keyof typeof tiers];
   };
@@ -119,19 +119,19 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, showCompar
 
           {/* Specs */}
           <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="bg-slate-50 rounded p-2">
+            <div className="bg-white rounded p-2">
               <div className="text-xs text-slate-600">Area</div>
               <div className="font-semibold text-slate-900">{property.areaKatha} Katha</div>
               <div className="text-xs text-slate-600">({property.areaDecimal} Dec)</div>
             </div>
-            <div className="bg-slate-50 rounded p-2">
+            <div className="bg-white rounded p-2">
               <div className="text-xs text-slate-600">Road Type</div>
               <div className="font-semibold text-slate-900">{property.roadType}</div>
             </div>
           </div>
 
           {/* Revenue IDs */}
-          <div className="bg-slate-50 rounded p-3 text-xs space-y-1">
+          <div className="bg-white rounded p-3 text-xs space-y-1">
             <div className="grid grid-cols-3 gap-2">
               <div>
                 <span className="text-slate-600">Khata:</span>
@@ -155,7 +155,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, showCompar
                 e.preventDefault();
                 toggleComparison(property.id);
               }}
-              className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition cursor-pointer"
+              className="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 hover:bg-slate-100 transition cursor-pointer"
             >
               <input
                 type="checkbox"

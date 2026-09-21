@@ -101,7 +101,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
           {/* Step 1: Property Details & Terms */}
           {step === 1 && (
             <div className="space-y-4">
-              <div className="bg-slate-50 rounded-lg p-4">
+              <div className="bg-white rounded-lg p-4">
                 <h3 className="font-semibold text-slate-900 mb-3">Property Details</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
@@ -146,7 +146,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
 
               <div className="space-y-3">
                 <h4 className="font-semibold text-slate-900">Terms & Conditions</h4>
-                <div className="bg-slate-50 rounded-lg p-3 max-h-40 overflow-y-auto text-sm text-slate-700 space-y-2">
+                <div className="bg-white rounded-lg p-3 max-h-40 overflow-y-auto text-sm text-slate-700 space-y-2">
                   <p>• Holding deposit is non-refundable if buyer cancels without valid reason after 7 days</p>
                   <p>• Seller has the right to cancel booking if holding deposit is not paid within 48 hours</p>
                   <p>• All documents must be verified before possession</p>
@@ -155,7 +155,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
                   <p>• Possession date to be mutually agreed upon after booking confirmation</p>
                 </div>
 
-                <label className="flex items-start gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                <label className="flex items-start gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-white">
                   <input
                     type="checkbox"
                     checked={formData.termsAccepted}
@@ -179,7 +179,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
                 <label
                   key={method}
                   className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                    formData.paymentMethod === method ? "border-slate-900 bg-slate-50" : "border-slate-200 hover:border-slate-300"
+                    formData.paymentMethod === method ? "border-slate-900 bg-white" : "border-slate-200 hover:border-slate-300"
                   }`}
                 >
                   <input
@@ -239,7 +239,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-lg p-4 space-y-2">
+              <div className="bg-white rounded-lg p-4 space-y-2">
                 <h4 className="font-semibold text-slate-900">Booking Summary</h4>
                 <div className="text-sm space-y-1">
                   <div className="flex justify-between">
@@ -278,7 +278,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ property, onClose, o
             <button
               onClick={() => setStep((s) => (s > 1 ? (s - 1 as any) : s))}
               disabled={step === 1}
-              className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>

@@ -68,7 +68,7 @@ export const NegotiationModal: React.FC<NegotiationModalProps> = ({ property, on
 
         <div className="p-6 space-y-6">
           {/* Property Summary */}
-          <div className="bg-slate-50 rounded-lg p-4">
+          <div className="bg-white rounded-lg p-4">
             <h3 className="font-semibold text-slate-900 mb-3">Property Details</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -187,7 +187,7 @@ export const NegotiationModal: React.FC<NegotiationModalProps> = ({ property, on
           <div className="flex gap-4 pt-4 border-t border-slate-200">
             <button
               onClick={onClose}
-              className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
+              className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-white transition-colors"
             >
               Cancel
             </button>

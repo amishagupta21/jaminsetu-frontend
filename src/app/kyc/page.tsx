@@ -11,7 +11,7 @@ export default function KYCPage() {
   const [showForm, setShowForm] = useState(!currentUserKYC);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -83,7 +83,7 @@ export default function KYCPage() {
                 </Link>
                 <button
                   onClick={() => setShowForm(true)}
-                  className="flex-1 px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
+                  className="flex-1 px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-white transition-colors"
                 >
                   Update Information
                 </button>

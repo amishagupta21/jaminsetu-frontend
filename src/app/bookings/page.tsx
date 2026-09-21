@@ -36,13 +36,13 @@ export default function BookingsPage() {
       case "refunded":
         return "bg-blue-50 border-blue-200 text-blue-900";
       default:
-        return "bg-slate-50 border-slate-200 text-slate-900";
+        return "bg-white border-slate-200 text-slate-900";
     }
   };
 
   if (!currentUserKYC) {
     return (
-      <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold text-slate-900 mb-6">My Bookings</h1>
 
@@ -65,7 +65,7 @@ export default function BookingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -91,7 +91,7 @@ export default function BookingsPage() {
                   {/* Booking Header */}
                   <button
                     onClick={() => setSelectedBooking(isExpanded ? null : booking.id)}
-                    className="w-full px-6 py-4 hover:bg-slate-50 transition-colors text-left flex items-center justify-between"
+                    className="w-full px-6 py-4 hover:bg-white transition-colors text-left flex items-center justify-between"
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
@@ -123,7 +123,7 @@ export default function BookingsPage() {
 
                   {/* Expanded Details */}
                   {isExpanded && property && (
-                    <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 space-y-4">
+                    <div className="px-6 py-4 bg-white border-t border-slate-200 space-y-4">
                       {/* Property Details */}
                       <div>
                         <h4 className="font-semibold text-slate-900 mb-2">Property Details</h4>

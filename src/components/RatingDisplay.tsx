@@ -21,7 +21,7 @@ export const RatingDisplay: React.FC<RatingDisplayProps> = ({ rating, showReview
   return (
     <div className="space-y-4">
       {/* Rating Summary */}
-      <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+      <div className="bg-white rounded-lg p-4 border border-slate-200">
         <div className="flex items-center gap-4">
           <div className="flex items-baseline gap-1">
             <span className="text-3xl font-bold text-slate-900">{rating.average}</span>

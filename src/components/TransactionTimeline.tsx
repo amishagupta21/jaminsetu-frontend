@@ -49,7 +49,7 @@ export const TransactionTimeline: React.FC<TransactionTimelineProps> = ({ bookin
     <div className="space-y-6">
       {/* Booking Timeline */}
       {booking && (
-        <div className="bg-slate-50 rounded-lg p-4">
+        <div className="bg-white rounded-lg p-4">
           <h3 className="font-semibold text-slate-900 mb-4">Booking Timeline</h3>
 
           <div className="space-y-4">
@@ -142,7 +142,7 @@ export const TransactionTimeline: React.FC<TransactionTimelineProps> = ({ bookin
 
       {/* Negotiations Timeline */}
       {negotiations.length > 0 && (
-        <div className="bg-slate-50 rounded-lg p-4">
+        <div className="bg-white rounded-lg p-4">
           <h3 className="font-semibold text-slate-900 mb-4">Negotiation History</h3>
 
           <div className="space-y-4">
@@ -187,7 +187,7 @@ export const TransactionTimeline: React.FC<TransactionTimelineProps> = ({ bookin
       )}
 
       {!booking && negotiations.length === 0 && (
-        <div className="bg-slate-50 rounded-lg p-6 text-center">
+        <div className="bg-white rounded-lg p-6 text-center">
           <p className="text-slate-600">No transaction history yet</p>
         </div>
       )}

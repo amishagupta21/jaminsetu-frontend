@@ -31,7 +31,7 @@ export default function PropertyPage() {
 
   if (isLoading || !property) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-slate-600">Loading property details...</p>
         </div>
@@ -40,7 +40,7 @@ export default function PropertyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 py-8">

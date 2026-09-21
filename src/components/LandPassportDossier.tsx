@@ -57,34 +57,34 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
           <div className="text-center mb-6 pb-4 border-b-2 border-slate-200">
             <h2 className="text-2xl font-bold text-slate-900">OFFICIAL BIHAR LAND PASSPORT</h2>
             <p className="text-xs text-slate-600 mt-1">(Cross-referenced with Bihar Bhumi records)</p>
-            <p className="text-sm font-mono text-slate-700 mt-2 bg-slate-50 inline-block px-3 py-1 rounded">
+            <p className="text-sm font-mono text-slate-700 mt-2 bg-white inline-block px-3 py-1 rounded">
               {property.code}
             </p>
           </div>
 
           {/* Revenue Identifiers Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Khata Number</div>
               <div className="text-2xl font-bold text-slate-900 mt-1">{property.khata}</div>
             </div>
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Khesra Number</div>
               <div className="text-2xl font-bold text-slate-900 mt-1">{property.khesra}</div>
             </div>
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Jamabandi No</div>
               <div className="text-2xl font-bold text-slate-900 mt-1">{property.jamabandi}</div>
             </div>
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Mauza</div>
               <div className="text-xl font-bold text-slate-900 mt-1">{property.mauza}</div>
             </div>
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Anchal</div>
               <div className="text-xl font-bold text-slate-900 mt-1">{property.anchal}</div>
             </div>
-            <div className="border-2 border-slate-300 rounded-lg p-4 bg-slate-50">
+            <div className="border-2 border-slate-300 rounded-lg p-4 bg-white">
               <div className="text-xs font-semibold text-slate-600 uppercase">Thana</div>
               <div className="text-2xl font-bold text-slate-900 mt-1">{property.thanaNumber}</div>
             </div>
@@ -164,7 +164,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
             Cadastral Map & Document Vault
           </h3>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-200">
               <div>
                 <p className="font-semibold text-slate-900 text-sm">Jamabandi Extract (Online Match)</p>
                 <p className="text-xs text-slate-600">verified against Bihar Bhumi portal</p>
@@ -173,7 +173,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
                 View PDF
               </button>
             </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-200">
               <div>
                 <p className="font-semibold text-slate-900 text-sm">Field Inspection Report</p>
                 <p className="text-xs text-slate-600">Physical verification & measurements</p>
@@ -189,7 +189,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
       {/* Right Sidebar - 1/3 width */}
       <div className="space-y-4">
         {/* Price Card */}
-        <div className="bg-slate-50 border-2 border-slate-700 rounded-lg p-6">
+        <div className="bg-white border-2 border-slate-700 rounded-lg p-6">
           <div className="text-sm text-slate-700 font-semibold">ASKING PRICE</div>
           <div className="text-4xl font-bold text-slate-900 mt-2">{formatPrice(property.totalPrice)}</div>
           <div className="mt-4 pt-4 border-t border-slate-200">
@@ -281,7 +281,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         </button>
 
         {/* Seller Info (Masked) */}
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm">
+        <div className="bg-white border border-slate-200 rounded-lg p-4 text-sm">
           <div className="text-xs font-semibold text-slate-600 uppercase mb-2">Seller Information</div>
           <div className="text-slate-700 space-y-1">
             <div>

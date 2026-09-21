@@ -63,7 +63,7 @@ export default function NegotiationsPage() {
 
   if (!currentUserKYC) {
     return (
-      <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold text-slate-900 mb-6">My Offers</h1>
 
@@ -86,7 +86,7 @@ export default function NegotiationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -118,7 +118,7 @@ export default function NegotiationsPage() {
                       {/* Offer Header */}
                       <button
                         onClick={() => setSelectedNeg(isExpanded ? null : neg.id)}
-                        className="w-full px-6 py-4 hover:bg-slate-50 transition-colors text-left flex items-center justify-between"
+                        className="w-full px-6 py-4 hover:bg-white transition-colors text-left flex items-center justify-between"
                       >
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
@@ -161,7 +161,7 @@ export default function NegotiationsPage() {
 
                       {/* Expanded Details */}
                       {isExpanded && property && (
-                        <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 space-y-4">
+                        <div className="px-6 py-4 bg-white border-t border-slate-200 space-y-4">
                           {/* Price Breakdown */}
                           <div className="bg-white rounded-lg p-4 border border-slate-200">
                             <h4 className="font-semibold text-slate-900 mb-3">Price Details</h4>
@@ -239,7 +239,7 @@ export default function NegotiationsPage() {
                           {/* Action Buttons */}
                           {neg.status === "pending" && !isExpired && (
                             <div className="flex gap-2 pt-4 border-t border-slate-200">
-                              <button className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 text-sm font-medium transition-colors">
+                              <button className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-white text-sm font-medium transition-colors">
                                 Modify Offer
                               </button>
                               <button className="flex-1 px-4 py-2 bg-red-50 border border-red-200 text-red-700 rounded-lg hover:bg-red-100 text-sm font-medium transition-colors">

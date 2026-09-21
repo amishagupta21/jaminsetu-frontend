@@ -44,7 +44,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({ propertyId, onSubmit }) 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-50 rounded-lg p-6 border border-slate-200">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 border border-slate-200">
       <h4 className="font-semibold text-slate-900 mb-4">Share Your Experience</h4>
 
       {submitted && (
