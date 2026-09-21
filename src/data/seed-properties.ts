@@ -23,6 +23,8 @@ export const seedProperties: Property[] = [
     roadWidth: 24,
     roadType: "Pakka",
     facing: "East",
+    landType: "Commercial",
+    coordinates: { lat: 25.3048, lng: 84.3775 },
 
     totalPrice: 3600000,
     pricePerKatha: 1800000,
@@ -41,6 +43,58 @@ export const seedProperties: Property[] = [
     sellerCategory: "Individual",
 
     status: "Available",
+    rating: {
+      average: 4.5,
+      count: 2,
+      reviews: [
+        {
+          id: "review-001",
+          userId: "user-001",
+          userName: "Amit Sharma",
+          rating: 5,
+          comment: "Great commercial location with high visibility",
+          createdAt: "2025-09-10T08:00:00Z",
+        },
+        {
+          id: "review-002",
+          userId: "user-002",
+          userName: "Priya Singh",
+          rating: 4,
+          comment: "Good road connectivity and accessibility",
+          createdAt: "2025-09-15T12:00:00Z",
+        },
+      ],
+    },
+    amenities: [
+      {
+        id: "amen-001",
+        name: "St. Mary's School",
+        type: "School",
+        distance: 0.8,
+        description: "Reputed ICSE school",
+      },
+      {
+        id: "amen-002",
+        name: "Bikramganj Hospital",
+        type: "Hospital",
+        distance: 1.2,
+        description: "Government hospital with good facilities",
+      },
+      {
+        id: "amen-003",
+        name: "Bikramganj Market",
+        type: "Market",
+        distance: 0.5,
+        description: "Main market hub",
+      },
+      {
+        id: "amen-004",
+        name: "Central Bus Stand",
+        type: "BusStand",
+        distance: 1.5,
+        description: "Inter-state and local buses",
+      },
+    ],
     createdAt: "2025-08-15T10:30:00Z",
     updatedAt: "2025-09-15T14:22:00Z",
   },
@@ -66,6 +120,8 @@ export const seedProperties: Property[] = [
     roadWidth: 40,
     roadType: "Pakka",
     facing: "North",
+    landType: "Commercial",
+    coordinates: { lat: 24.9347, lng: 84.2739 },
 
     totalPrice: 8100000,
     pricePerKatha: 1800000,
@@ -84,6 +140,43 @@ export const seedProperties: Property[] = [
     sellerCategory: "Broker",
 
     status: "Available",
+    rating: {
+      average: 4.0,
+      count: 1,
+      reviews: [
+        {
+          id: "review-003",
+          userId: "user-003",
+          userName: "Rajesh Verma",
+          rating: 4,
+          comment: "Excellent highway access and visibility",
+          createdAt: "2025-09-18T10:00:00Z",
+        },
+      ],
+    },
+    amenities: [
+      {
+        id: "amen-005",
+        name: "Sasaram Public School",
+        type: "School",
+        distance: 1.0,
+        description: "Modern CBSE school",
+      },
+      {
+        id: "amen-006",
+        name: "Anamika Hospital",
+        type: "Hospital",
+        distance: 2.0,
+        description: "Private hospital with diagnostics",
+      },
+      {
+        id: "amen-007",
+        name: "Bypass Market Complex",
+        type: "Market",
+        distance: 0.3,
+        description: "Shopping complex on GT Road",
+      },
+    ],
     createdAt: "2025-07-20T09:15:00Z",
     updatedAt: "2025-09-18T11:45:00Z",
   },
@@ -109,6 +202,8 @@ export const seedProperties: Property[] = [
     roadWidth: 30,
     roadType: "Pakka",
     facing: "South",
+    landType: "Residential",
+    coordinates: { lat: 24.8369, lng: 84.3994 },
 
     totalPrice: 2400000,
     pricePerKatha: 800000,
@@ -127,6 +222,27 @@ export const seedProperties: Property[] = [
     sellerCategory: "Individual",
 
     status: "Available",
+    rating: {
+      average: 4.5,
+      count: 2,
+      reviews: [],
+    },
+    amenities: [
+      {
+        id: "amen-008",
+        name: "Dehri Central School",
+        type: "School",
+        distance: 1.5,
+        description: "Senior secondary school",
+      },
+      {
+        id: "amen-009",
+        name: "Dehri Clinic",
+        type: "Hospital",
+        distance: 2.5,
+        description: "Basic health center",
+      },
+    ],
     createdAt: "2025-09-01T13:20:00Z",
     updatedAt: "2025-09-19T16:10:00Z",
   },
@@ -152,6 +268,8 @@ export const seedProperties: Property[] = [
     roadWidth: 16,
     roadType: "Soling",
     facing: "West",
+    landType: "Agricultural",
+    coordinates: { lat: 25.2956, lng: 84.2458 },
 
     totalPrice: 4800000,
     pricePerKatha: 384000,
@@ -170,6 +288,27 @@ export const seedProperties: Property[] = [
     sellerCategory: "Individual",
 
     status: "Available",
+    rating: {
+      average: 0,
+      count: 0,
+      reviews: [],
+    },
+    amenities: [
+      {
+        id: "amen-010",
+        name: "Banspatti Gram Panchayat",
+        type: "GovernmentOffice",
+        distance: 1.0,
+        description: "Local government office",
+      },
+      {
+        id: "amen-011",
+        name: "Agricultural Cooperative",
+        type: "Market",
+        distance: 2.0,
+        description: "Farm supplies and equipment",
+      },
+    ],
     createdAt: "2025-06-10T08:45:00Z",
     updatedAt: "2025-09-10T10:30:00Z",
   },
@@ -195,6 +334,8 @@ export const seedProperties: Property[] = [
     roadWidth: 32,
     roadType: "Pakka",
     facing: "Northeast",
+    landType: "Commercial",
+    coordinates: { lat: 24.9289, lng: 84.2825 },
 
     totalPrice: 2800000,
     pricePerKatha: 2800000,
@@ -213,6 +354,43 @@ export const seedProperties: Property[] = [
     sellerCategory: "Developer",
 
     status: "Available",
+    rating: {
+      average: 5.0,
+      count: 1,
+      reviews: [
+        {
+          id: "review-004",
+          userId: "user-004",
+          userName: "Nirav Patel",
+          rating: 5,
+          comment: "Perfect for retail business, prime location",
+          createdAt: "2025-09-17T14:00:00Z",
+        },
+      ],
+    },
+    amenities: [
+      {
+        id: "amen-012",
+        name: "Sasaram Central Market",
+        type: "Market",
+        distance: 0.2,
+        description: "Main shopping district",
+      },
+      {
+        id: "amen-013",
+        name: "City Hospital",
+        type: "Hospital",
+        distance: 0.8,
+        description: "Multi-specialty hospital",
+      },
+      {
+        id: "amen-014",
+        name: "Sasaram Railway Station",
+        type: "BusStand",
+        distance: 1.2,
+        description: "Railway connectivity",
+      },
+    ],
     createdAt: "2025-07-05T11:00:00Z",
     updatedAt: "2025-09-17T15:30:00Z",
   },
@@ -238,6 +416,8 @@ export const seedProperties: Property[] = [
     roadWidth: 50,
     roadType: "Pakka",
     facing: "North",
+    landType: "Commercial",
+    coordinates: { lat: 24.8252, lng: 84.4132 },
 
     totalPrice: 11200000,
     pricePerKatha: 1600000,
@@ -256,6 +436,27 @@ export const seedProperties: Property[] = [
     sellerCategory: "Developer",
 
     status: "Available",
+    rating: {
+      average: 4.5,
+      count: 1,
+      reviews: [],
+    },
+    amenities: [
+      {
+        id: "amen-015",
+        name: "Dehri Industrial Association",
+        type: "GovernmentOffice",
+        distance: 0.5,
+        description: "Industrial authority office",
+      },
+      {
+        id: "amen-016",
+        name: "Industrial Highway",
+        type: "BusStand",
+        distance: 0.8,
+        description: "Connected to NH highway",
+      },
+    ],
     createdAt: "2025-08-22T14:30:00Z",
     updatedAt: "2025-09-16T09:45:00Z",
   },
@@ -281,6 +482,8 @@ export const seedProperties: Property[] = [
     roadWidth: 36,
     roadType: "Pakka",
     facing: "Southeast",
+    landType: "Commercial",
+    coordinates: { lat: 25.3089, lng: 84.3762 },
 
     totalPrice: 3600000,
     pricePerKatha: 2400000,
@@ -299,6 +502,27 @@ export const seedProperties: Property[] = [
     sellerCategory: "Individual",
 
     status: "Available",
+    rating: {
+      average: 4.0,
+      count: 2,
+      reviews: [],
+    },
+    amenities: [
+      {
+        id: "amen-017",
+        name: "Bikramganj College",
+        type: "School",
+        distance: 0.7,
+        description: "Government college",
+      },
+      {
+        id: "amen-018",
+        name: "Main Road Bus Stop",
+        type: "BusStand",
+        distance: 0.3,
+        description: "Local and express buses",
+      },
+    ],
     createdAt: "2025-09-05T12:15:00Z",
     updatedAt: "2025-09-20T13:00:00Z",
   },
@@ -324,6 +548,8 @@ export const seedProperties: Property[] = [
     roadWidth: 25,
     roadType: "Pakka",
     facing: "West",
+    landType: "Residential",
+    coordinates: { lat: 24.9278, lng: 84.2841 },
 
     totalPrice: 2000000,
     pricePerKatha: 800000,
@@ -342,6 +568,43 @@ export const seedProperties: Property[] = [
     sellerCategory: "Developer",
 
     status: "Available",
+    rating: {
+      average: 4.5,
+      count: 3,
+      reviews: [
+        {
+          id: "review-005",
+          userId: "user-005",
+          userName: "Suresh Kumar",
+          rating: 5,
+          comment: "Excellent community development project",
+          createdAt: "2025-09-12T09:00:00Z",
+        },
+      ],
+    },
+    amenities: [
+      {
+        id: "amen-019",
+        name: "Sasaram Public School",
+        type: "School",
+        distance: 2.0,
+        description: "International school",
+      },
+      {
+        id: "amen-020",
+        name: "Sasaram Medical Center",
+        type: "Hospital",
+        distance: 1.5,
+        description: "Advanced healthcare facility",
+      },
+      {
+        id: "amen-021",
+        name: "Community Shopping Mall",
+        type: "Market",
+        distance: 0.8,
+        description: "Shopping and dining complex",
+      },
+    ],
     createdAt: "2025-08-08T10:00:00Z",
     updatedAt: "2025-09-14T11:20:00Z",
   },

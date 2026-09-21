@@ -40,7 +40,7 @@ export default function PropertyPage() {
         {/* Back Button */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mb-6 transition"
+          className="flex items-center gap-2 text-black hover:text-slate-800 font-medium mb-6 transition"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Search

@@ -20,6 +20,7 @@ export const SellerForm = () => {
     roadWidth: 0,
     roadType: "Pakka",
     facing: "North",
+    landType: "Residential",
     khata: "",
     khesra: "",
     jamabandi: "",
@@ -36,6 +37,7 @@ export const SellerForm = () => {
     Sasaram: ["Sasaram City", "Sasaram Muffasil", "Sasaram Nagar"],
     Dehri: ["Dehri", "Dehri Industrial"],
   };
+  const LAND_TYPES = ["Residential", "Commercial", "Agricultural"];
   const ROAD_TYPES = ["Pakka", "Soling", "Kachha"];
   const FACINGS = ["North", "South", "East", "West", "Northeast", "Northwest", "Southeast", "Southwest"];
 
@@ -65,6 +67,7 @@ export const SellerForm = () => {
       if (!formData.roadWidth || formData.roadWidth <= 0) newErrors.roadWidth = "Valid road width required";
       if (!formData.roadType) newErrors.roadType = "Road type is required";
       if (!formData.facing) newErrors.facing = "Facing is required";
+      if (!formData.landType) newErrors.landType = "Land type is required";
     } else if (step === 3) {
       if (!formData.khata) newErrors.khata = "Khata number is required";
       if (!formData.khesra) newErrors.khesra = "Khesra number is required";
@@ -138,7 +141,7 @@ export const SellerForm = () => {
   );
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+    <div className="w-full bg-white rounded-lg p-8">
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex justify-between mb-2">
@@ -147,9 +150,9 @@ export const SellerForm = () => {
               key={s}
               className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition ${
                 s < step
-                  ? "bg-emerald-600 text-white"
+                  ? "bg-black text-white"
                   : s === step
-                  ? "bg-emerald-600 text-white ring-2 ring-emerald-400"
+                  ? "bg-black text-white ring-2 ring-slate-400"
                   : "bg-slate-200 text-slate-600"
               }`}
             >
@@ -159,7 +162,7 @@ export const SellerForm = () => {
         </div>
         <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
           <div
-            className="h-full bg-emerald-600 transition-all"
+            className="h-full bg-black transition-all"
             style={{ width: `${(step - 1) * 33.33}%` }}
           />
         </div>
@@ -196,11 +199,12 @@ export const SellerForm = () => {
 
         {step === 2 && (
           <>
+            {renderSelect("Land Type", "landType", LAND_TYPES)}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 {renderField("Area (Decimal)", "areaDecimal", "number")}
                 {formData.areaDecimal > 0 && (
-                  <p className="text-sm text-emerald-600 mt-1">
+                  <p className="text-sm text-slate-600 mt-1">
                     ≈ {convertDecimalToKatha(formData.areaDecimal)} Katha
                   </p>
                 )}

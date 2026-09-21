@@ -2,6 +2,10 @@
 
 import { Property } from "@/types";
 import { VerificationStepper } from "./VerificationStepper";
+import { MapComponent } from "./MapComponent";
+import { AmenitiesSection } from "./AmenitiesSection";
+import { RatingDisplay } from "./RatingDisplay";
+import { RatingForm } from "./RatingForm";
 import { FileText, MapPin, Ruler, Download, MessageCircle, Calendar } from "lucide-react";
 import { formatPrice, formatPriceDetailed, generateWhatsAppLink } from "@/utils/converters";
 
@@ -111,6 +115,38 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         {/* Verification Stepper */}
         <VerificationStepper property={property} />
 
+        {/* Map Section */}
+        <div className="bg-white rounded-lg border border-slate-200 p-6">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5" />
+            Property Location
+          </h3>
+          <MapComponent
+            coordinates={property.coordinates}
+            propertyTitle={property.title}
+            amenities={property.amenities}
+          />
+        </div>
+
+        {/* Amenities Section */}
+        {property.amenities && property.amenities.length > 0 && (
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <h3 className="text-lg font-semibold text-slate-900 mb-4">Nearby Amenities</h3>
+            <AmenitiesSection amenities={property.amenities} />
+          </div>
+        )}
+
+        {/* Ratings & Reviews */}
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <h3 className="text-lg font-semibold text-slate-900 mb-4">Property Ratings</h3>
+            <RatingDisplay rating={property.rating} showReviews={true} />
+          </div>
+
+          {/* Rating Form */}
+          <RatingForm propertyId={property.id} />
+        </div>
+
         {/* Document Vault */}
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
@@ -157,11 +193,11 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         </div>
 
         {/* Verification Badge */}
-        <div className={`rounded-lg p-6 ${property.verificationTier >= 3 ? "bg-slate-50 border-2 border-slate-700" : "bg-slate-100 border-2 border-slate-600"}`}>
-          <div className={`text-2xl font-bold ${property.verificationTier >= 3 ? "text-slate-800" : "text-slate-700"}`}>
-            ⚫ TIER {property.verificationTier}
+        <div className={`rounded-lg p-6 ${property.verificationTier >= 3 ? "bg-emerald-50 border-2 border-emerald-600" : "bg-slate-100 border-2 border-slate-600"}`}>
+          <div className={`text-2xl font-bold ${property.verificationTier >= 3 ? "text-emerald-700" : "text-slate-700"}`}>
+            🟢 TIER {property.verificationTier}
           </div>
-          <div className={`text-sm font-semibold mt-2 ${property.verificationTier >= 3 ? "text-slate-800" : "text-slate-700"}`}>
+          <div className={`text-sm font-semibold mt-2 ${property.verificationTier >= 3 ? "text-emerald-700" : "text-slate-700"}`}>
             {property.verificationTier === 1 && "Pending Verification"}
             {property.verificationTier === 2 && "In Progress"}
             {property.verificationTier === 3 && "Site & Mutation Verified"}

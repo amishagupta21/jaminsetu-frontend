@@ -10,11 +10,11 @@ export default function ListLandPage() {
     <div className="min-h-screen bg-slate-50">
       <Header />
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="w-full px-4 py-8">
         {/* Back Button */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mb-8 transition"
+          className="flex items-center gap-2 text-black hover:text-slate-800 font-medium mb-8 transition"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Search

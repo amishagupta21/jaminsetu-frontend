@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Property, FilterState, SellerFormData } from "@/types";
+import { Property, FilterState, SellerFormData, FavoritesData, Review, Rating } from "@/types";
 import { storageAdapter } from "@/lib/storage";
 
 interface PropertyContextType {
@@ -11,17 +11,34 @@ interface PropertyContextType {
   filteredProperties: Property[];
   addProperty: (data: SellerFormData) => void;
   isLoading: boolean;
+  // Favorites
+  favorites: string[];
+  toggleFavorite: (propertyId: string) => void;
+  isFavorite: (propertyId: string) => boolean;
+  // Ratings
+  addReview: (propertyId: string, rating: number, comment: string, userName: string) => void;
+  getPropertyRating: (propertyId: string) => Rating | undefined;
+  // Comparison
+  comparisonList: string[];
+  toggleComparison: (propertyId: string) => void;
+  clearComparison: () => void;
 }
 
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
 
+const FAVORITES_STORAGE_KEY = "jaminsetu_favorites";
+const COMPARISON_STORAGE_KEY = "jaminsetu_comparison";
+
 export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [comparisonList, setComparisonList] = useState<string[]>([]);
   const [filters, setFilters] = useState<FilterState>({
     anchal: null,
     roadWidthMin: 0,
-    landCategory: [],
+    landType: [],
+    areaRange: [0, 100],
     priceRange: [0, 15000000],
     verifiedOnly: false,
     roadSurface: [],
@@ -31,6 +48,27 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     storageAdapter.initialize();
     const data = storageAdapter.getAll();
     setProperties(data);
+
+    // Load favorites from localStorage
+    try {
+      const savedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
+      if (savedFavorites) {
+        setFavorites(JSON.parse(savedFavorites));
+      }
+    } catch (e) {
+      console.error("Failed to load favorites:", e);
+    }
+
+    // Load comparison list from localStorage
+    try {
+      const savedComparison = localStorage.getItem(COMPARISON_STORAGE_KEY);
+      if (savedComparison) {
+        setComparisonList(JSON.parse(savedComparison));
+      }
+    } catch (e) {
+      console.error("Failed to load comparison list:", e);
+    }
+
     setIsLoading(false);
   }, []);
 
@@ -42,6 +80,16 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // Filter by minimum road width
     if (property.roadWidth < filters.roadWidthMin) {
+      return false;
+    }
+
+    // Filter by land type
+    if (filters.landType.length > 0 && !filters.landType.includes(property.landType)) {
+      return false;
+    }
+
+    // Filter by area range
+    if (property.areaDecimal < filters.areaRange[0] || property.areaDecimal > filters.areaRange[1]) {
       return false;
     }
 
@@ -71,8 +119,8 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newProperty: Property = {
       id,
       code: `ZS-RHT-${String(properties.length + 1).padStart(4, "0")}`,
-      title: `${data.facing} Facing Plot - ${data.mauza}, ${data.anchal}`,
-      description: `Newly listed property with ${data.roadWidth}ft ${data.roadType} road access.`,
+      title: `${data.landType} - ${data.facing} Facing Plot - ${data.mauza}, ${data.anchal}`,
+      description: `Newly listed ${data.landType.toLowerCase()} property with ${data.roadWidth}ft ${data.roadType} road access.`,
       images: [
         "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1494145904049-0dca7b0589b0?w=800&h=600&fit=crop",
@@ -90,6 +138,7 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       roadWidth: data.roadWidth,
       roadType: data.roadType,
       facing: data.facing as any,
+      landType: data.landType,
 
       totalPrice: data.totalPrice,
       pricePerKatha,
@@ -108,12 +157,87 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       sellerCategory: "Individual",
 
       status: "Available",
+      rating: {
+        average: 0,
+        count: 0,
+        reviews: [],
+      },
+      amenities: [],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
     storageAdapter.add(newProperty);
     setProperties([...properties, newProperty]);
+  };
+
+  const toggleFavorite = (propertyId: string) => {
+    setFavorites((prev) => {
+      const newFavorites = prev.includes(propertyId)
+        ? prev.filter((id) => id !== propertyId)
+        : [...prev, propertyId];
+      localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
+
+  const isFavorite = (propertyId: string) => {
+    return favorites.includes(propertyId);
+  };
+
+  const toggleComparison = (propertyId: string) => {
+    setComparisonList((prev) => {
+      let newList: string[];
+      if (prev.includes(propertyId)) {
+        newList = prev.filter((id) => id !== propertyId);
+      } else if (prev.length < 3) {
+        newList = [...prev, propertyId];
+      } else {
+        newList = prev;
+      }
+      localStorage.setItem(COMPARISON_STORAGE_KEY, JSON.stringify(newList));
+      return newList;
+    });
+  };
+
+  const clearComparison = () => {
+    setComparisonList([]);
+    localStorage.removeItem(COMPARISON_STORAGE_KEY);
+  };
+
+  const addReview = (propertyId: string, rating: number, comment: string, userName: string) => {
+    setProperties((prev) =>
+      prev.map((prop) => {
+        if (prop.id === propertyId) {
+          const reviews = prop.rating?.reviews || [];
+          const newReview: Review = {
+            id: `review-${Date.now()}`,
+            userId: `user-${Date.now()}`,
+            userName,
+            rating,
+            comment,
+            createdAt: new Date().toISOString(),
+          };
+          const allReviews = [...reviews, newReview];
+          const averageRating =
+            allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
+
+          return {
+            ...prop,
+            rating: {
+              average: Math.round(averageRating * 10) / 10,
+              count: allReviews.length,
+              reviews: allReviews,
+            },
+          };
+        }
+        return prop;
+      })
+    );
+  };
+
+  const getPropertyRating = (propertyId: string) => {
+    return properties.find((p) => p.id === propertyId)?.rating;
   };
 
   return (
@@ -125,6 +249,14 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         filteredProperties,
         addProperty,
         isLoading,
+        favorites,
+        toggleFavorite,
+        isFavorite,
+        addReview,
+        getPropertyRating,
+        comparisonList,
+        toggleComparison,
+        clearComparison,
       }}
     >
       {children}

@@ -2,14 +2,19 @@
 
 import Link from "next/link";
 import { Property } from "@/types";
-import { MapPin, Ruler, Check, Zap } from "lucide-react";
+import { MapPin, Check, Star } from "lucide-react";
 import { formatPrice } from "@/utils/converters";
+import { FavoritesButton } from "./FavoritesButton";
+import { useProperties } from "@/context/PropertyContext";
+import { RatingStars } from "./RatingStars";
 
 interface PropertyCardProps {
   property: Property;
+  showComparison?: boolean;
 }
 
-export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
+export const PropertyCard: React.FC<PropertyCardProps> = ({ property, showComparison = false }) => {
+  const { comparisonList, toggleComparison } = useProperties();
   const getTierBadge = (tier: number) => {
     const tiers = {
       1: { label: "Tier 1: Pending", color: "bg-slate-200 text-slate-800" },
@@ -32,6 +37,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             alt={property.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform"
           />
+          {/* Favorites Button */}
+          <div className="absolute top-3 left-3">
+            <FavoritesButton propertyId={property.id} size="md" />
+          </div>
+
           {/* Road Width Badge */}
           <div className="absolute top-3 right-3 bg-white shadow-lg rounded-full px-3 py-1.5 text-sm font-bold text-slate-900">
             {property.roadWidth}ft
@@ -47,18 +57,47 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
               `TIER ${property.verificationTier}`
             )}
           </div>
+
+          {/* Rating Badge */}
+          {property.rating && property.rating.count > 0 && (
+            <div className="absolute bottom-3 right-3 bg-white shadow-lg rounded-full px-3 py-1.5 text-sm font-bold text-slate-900 flex items-center gap-1">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              {property.rating.average}
+            </div>
+          )}
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-3">
+        <div className="p-4 space-y-3 flex flex-col h-full">
           {/* Title & Location */}
           <div>
-            <h3 className="font-semibold text-slate-900 line-clamp-2">{property.title}</h3>
-            <div className="flex items-center gap-1 text-sm text-slate-600 mt-1">
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <h3 className="font-semibold text-slate-900 line-clamp-2 flex-1">{property.title}</h3>
+              <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded whitespace-nowrap">
+                {property.landType}
+              </span>
+            </div>
+            <div className="flex items-center gap-1 text-sm text-slate-600">
               <MapPin className="w-4 h-4" />
               {property.mauza}, {property.anchal}
             </div>
           </div>
+
+          {/* Rating */}
+          {property.rating && property.rating.count > 0 && (
+            <div className="py-2 border-y border-slate-200">
+              <RatingStars rating={property.rating.average} count={property.rating.count} size="sm" />
+            </div>
+          )}
+
+          {/* Amenities Badge */}
+          {property.amenities && property.amenities.length > 0 && (
+            <div className="flex gap-2">
+              <span className="inline-block bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium">
+                {property.amenities.length} amenities
+              </span>
+            </div>
+          )}
 
           {/* Pricing */}
           <div className="bg-slate-100 rounded-lg p-3 space-y-1 border border-slate-300">
@@ -99,14 +138,38 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="grid grid-cols-2 gap-2 pt-2">
-            <button className="bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold py-2 px-3 rounded-lg transition text-sm">
-              View Passport
-            </button>
-            <button className="bg-black hover:bg-slate-900 text-white font-semibold py-2 px-3 rounded-lg transition text-sm">
-              WhatsApp
-            </button>
+          {/* Comparison Checkbox & CTA Buttons */}
+          <div className="space-y-2 pt-2 mt-auto">
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                toggleComparison(property.id);
+              }}
+              className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                checked={comparisonList.includes(property.id)}
+                onChange={() => {}}
+                className="w-4 h-4 cursor-pointer"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <span className="text-sm font-medium text-slate-900">Compare ({comparisonList.length}/3)</span>
+            </div>
+            {showComparison ? (
+              <button className="w-full bg-black hover:bg-slate-900 text-white font-semibold py-2 px-3 rounded-lg transition text-sm">
+                Add to Comparison
+              </button>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <button className="bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold py-2 px-3 rounded-lg transition text-sm">
+                  View Passport
+                </button>
+                <button className="bg-black hover:bg-slate-900 text-white font-semibold py-2 px-3 rounded-lg transition text-sm">
+                  WhatsApp
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

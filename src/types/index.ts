@@ -1,3 +1,34 @@
+export type LandType = "Residential" | "Commercial" | "Agricultural";
+
+export interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+export interface Amenity {
+  id: string;
+  name: string;
+  type: "School" | "Hospital" | "Market" | "BusStand" | "GovernmentOffice" | "Other";
+  distance: number; // in km
+  coordinates?: Coordinates;
+  description?: string;
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  rating: number; // 1-5
+  comment: string;
+  createdAt: string;
+}
+
+export interface Rating {
+  average: number; // 1-5
+  count: number;
+  reviews: Review[];
+}
+
 export interface Property {
   id: string;
   code: string; // e.g., "ZS-RHT-0101"
@@ -19,6 +50,10 @@ export interface Property {
   roadWidth: number; // in feet
   roadType: "Pakka" | "Soling" | "Kachha";
   facing: "North" | "South" | "East" | "West" | "Northeast" | "Northwest" | "Southeast" | "Southwest";
+  landType: LandType; // NEW: Residential, Commercial, Agricultural
+
+  // Location Coordinates
+  coordinates?: Coordinates; // NEW: For map integration
 
   // Pricing
   totalPrice: number; // in INR
@@ -42,6 +77,12 @@ export interface Property {
   // Status
   status: "Available" | "Reserved" | "Sold";
 
+  // Ratings & Reviews
+  rating?: Rating; // NEW: Ratings and reviews
+
+  // Nearby Amenities
+  amenities?: Amenity[]; // NEW: Schools, hospitals, markets, etc.
+
   // Metadata
   createdAt: string;
   updatedAt: string;
@@ -58,7 +99,8 @@ export interface VerificationCheck {
 export interface FilterState {
   anchal: string | null;
   roadWidthMin: number;
-  landCategory: ("Residential" | "Commercial" | "Agricultural")[];
+  landType: LandType[]; // NEW: Filter by land type
+  areaRange: [number, number]; // NEW: Filter by area (in Decimal)
   priceRange: [number, number];
   verifiedOnly: boolean;
   roadSurface: ("Pakka" | "Soling" | "Kachha")[];
@@ -75,6 +117,7 @@ export interface SellerFormData {
   roadWidth: number;
   roadType: "Pakka" | "Soling" | "Kachha";
   facing: string;
+  landType: LandType; // NEW: Land type category
 
   // Step 3: Revenue IDs
   khata: string;
@@ -85,4 +128,15 @@ export interface SellerFormData {
   totalPrice: number;
   sellerName: string;
   sellerPhone: string;
+}
+
+// NEW: Favorites/Wishlist
+export interface FavoritesData {
+  propertyIds: string[];
+  addedAt: { [propertyId: string]: string };
+}
+
+// NEW: Comparison state
+export interface ComparisonState {
+  selectedProperties: string[]; // Max 3 property IDs
 }
