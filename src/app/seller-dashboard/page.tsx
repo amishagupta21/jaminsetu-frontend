@@ -77,11 +77,11 @@ export default function SellerDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4">
+          <Link href="/" className="inline-flex items-center gap-2 text-black hover:text-slate-800 mb-4 font-medium transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7 7l-7-7 7-7" />
             </svg>
@@ -89,12 +89,12 @@ export default function SellerDashboardPage() {
           </Link>
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Seller Dashboard</h1>
-              <p className="text-gray-600 mt-2">Manage your listings and track performance</p>
+              <h1 className="text-3xl font-bold text-slate-900">Seller Dashboard</h1>
+              <p className="text-slate-600 mt-2">Manage your listings and track performance</p>
             </div>
             <Link
               href="/list-land"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition"
+              className="bg-black hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium transition"
             >
               + List New Property
             </Link>
@@ -105,44 +105,44 @@ export default function SellerDashboardPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Stats Cards */}
         <div className="grid md:grid-cols-5 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <p className="text-sm text-gray-600 mb-2">Total Listings</p>
-            <p className="text-3xl font-bold text-gray-900">{stats.totalListings}</p>
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 mb-2">Total Listings</p>
+            <p className="text-3xl font-bold text-slate-900">{stats.totalListings}</p>
           </div>
 
-          <div className="bg-blue-50 rounded-lg shadow p-6 border border-blue-200">
-            <p className="text-sm text-gray-600 mb-2">Total Views</p>
-            <p className="text-3xl font-bold text-blue-600">{stats.totalViews}</p>
-            <p className="text-xs text-gray-500 mt-2">Avg {stats.avgViews}/listing</p>
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 mb-2">Total Views</p>
+            <p className="text-3xl font-bold text-slate-900">{stats.totalViews}</p>
+            <p className="text-xs text-slate-500 mt-2">Avg {stats.avgViews}/listing</p>
           </div>
 
-          <div className="bg-red-50 rounded-lg shadow p-6 border border-red-200">
-            <p className="text-sm text-gray-600 mb-2">Total Favorites</p>
-            <p className="text-3xl font-bold text-red-600">{stats.totalFavorites}</p>
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 mb-2">Total Favorites</p>
+            <p className="text-3xl font-bold text-slate-900">{stats.totalFavorites}</p>
           </div>
 
-          <div className="bg-purple-50 rounded-lg shadow p-6 border border-purple-200">
-            <p className="text-sm text-gray-600 mb-2">Total Comparisons</p>
-            <p className="text-3xl font-bold text-purple-600">{stats.totalComparisons}</p>
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 mb-2">Total Comparisons</p>
+            <p className="text-3xl font-bold text-slate-900">{stats.totalComparisons}</p>
           </div>
 
-          <div className="bg-green-50 rounded-lg shadow p-6 border border-green-200">
-            <p className="text-sm text-gray-600 mb-2">Trending</p>
-            <p className="text-3xl font-bold text-green-600">{stats.trendingCount}</p>
-            <p className="text-xs text-gray-500 mt-2">High engagement</p>
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 mb-2">Trending</p>
+            <p className="text-3xl font-bold text-slate-900">{stats.trendingCount}</p>
+            <p className="text-xs text-slate-500 mt-2">High engagement</p>
           </div>
         </div>
 
         {/* Listings Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-            <h2 className="text-lg font-semibold text-gray-900">Your Listings</h2>
+        <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+          <div className="p-4 border-b border-slate-200 flex justify-between items-center">
+            <h2 className="text-lg font-semibold text-slate-900">Your Listings</h2>
             <div>
-              <label className="text-sm text-gray-600 mr-2">Sort by:</label>
+              <label className="text-sm text-slate-600 mr-2">Sort by:</label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                className="px-3 py-1 border border-slate-300 rounded text-sm focus:ring-2 focus:ring-black focus:border-transparent"
               >
                 <option value="views">Most Viewed</option>
                 <option value="favorites">Most Favorited</option>
@@ -154,49 +154,49 @@ export default function SellerDashboardPage() {
 
           {listedProperties.length === 0 ? (
             <div className="p-8 text-center">
-              <p className="text-gray-600 mb-4">You haven't listed any properties yet</p>
+              <p className="text-slate-600 mb-4">You haven't listed any properties yet</p>
               <Link
                 href="/list-land"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+                className="inline-block bg-black hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium"
               >
                 List Your First Property
               </Link>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Property</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Location</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Area</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-700 uppercase">Views</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-700 uppercase">Favorites</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-700 uppercase">Compared</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Property</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Location</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Price</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Area</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-slate-700 uppercase">Views</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-slate-700 uppercase">Favorites</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-slate-700 uppercase">Compared</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-700 uppercase">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-slate-200">
                   {listedProperties.map((property) => (
-                    <tr key={property.id} className="hover:bg-gray-50">
+                    <tr key={property.id} className="hover:bg-slate-50">
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link href={`/property/${property.id}`} className="text-blue-600 hover:text-blue-700 font-medium">
+                        <Link href={`/property/${property.id}`} className="text-black hover:text-slate-800 font-medium">
                           {property.code}
                         </Link>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
                         {property.mauza}, {property.anchal}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap font-semibold text-slate-900">
                         {formatCurrency(property.totalPrice)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
                         {formatArea(property.areaKatha)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold border border-slate-300">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -205,7 +205,7 @@ export default function SellerDashboardPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <span className="inline-flex items-center gap-1 bg-red-50 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold border border-slate-300">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                           </svg>
@@ -213,7 +213,7 @@ export default function SellerDashboardPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <span className="inline-flex items-center gap-1 bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">
+                        <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-900 px-3 py-1 rounded-full text-sm font-semibold border border-slate-300">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                           </svg>
@@ -222,12 +222,12 @@ export default function SellerDashboardPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${
+                          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border ${
                             property.status === "Available"
-                              ? "bg-green-100 text-green-800"
+                              ? "bg-white text-slate-900 border-slate-300"
                               : property.status === "Reserved"
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-gray-100 text-gray-800"
+                              ? "bg-white text-slate-900 border-slate-300"
+                              : "bg-white text-slate-900 border-slate-300"
                           }`}
                         >
                           {property.status}
@@ -236,7 +236,7 @@ export default function SellerDashboardPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <Link
                           href={`/property/${property.id}`}
-                          className="text-blue-600 hover:text-blue-700 font-medium"
+                          className="text-black hover:text-slate-800 font-medium"
                         >
                           View
                         </Link>
