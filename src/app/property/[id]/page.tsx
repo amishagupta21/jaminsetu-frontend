@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/Header";
 import { LandPassportDossier } from "@/components/LandPassportDossier";
+import { SimilarPropertiesWidget } from "@/components/SimilarPropertiesWidget";
 import { useProperties } from "@/context/PropertyContext";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function PropertyPage() {
   const params = useParams();
-  const { properties } = useProperties();
+  const { properties, recordPropertyView } = useProperties();
   const [property, setProperty] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,9 +19,15 @@ export default function PropertyPage() {
     if (properties.length > 0) {
       const found = properties.find((p) => p.id === params.id);
       setProperty(found);
+
+      // PHASE 3: Record property view
+      if (found) {
+        recordPropertyView(found.id);
+      }
+
       setIsLoading(false);
     }
-  }, [properties, params.id]);
+  }, [properties, params.id, recordPropertyView]);
 
   if (isLoading || !property) {
     return (

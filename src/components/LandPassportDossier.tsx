@@ -9,6 +9,8 @@ import { RatingDisplay } from "./RatingDisplay";
 import { RatingForm } from "./RatingForm";
 import { BookingModal } from "./BookingModal";
 import { NegotiationModal } from "./NegotiationModal";
+import { SimilarPropertiesWidget } from "./SimilarPropertiesWidget";
+import { PropertyMetricsDisplay } from "./PropertyMetricsDisplay";
 import { FileText, MapPin, Ruler, Download, MessageCircle, Calendar, ShoppingCart, Zap } from "lucide-react";
 import { formatPrice, formatPriceDetailed, generateWhatsAppLink } from "@/utils/converters";
 
@@ -152,6 +154,9 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
           <RatingForm propertyId={property.id} />
         </div>
 
+        {/* PHASE 3: Similar Properties Widget */}
+        <SimilarPropertiesWidget propertyId={property.id} limit={4} />
+
         {/* Document Vault */}
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
@@ -209,6 +214,9 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
             {property.verificationTier === 4 && "Full Title Search Completed"}
           </div>
         </div>
+
+        {/* PHASE 3: Property Metrics Display */}
+        <PropertyMetricsDisplay propertyId={property.id} compact={false} />
 
         {/* Security Commitments */}
         <div className="bg-white border border-slate-200 rounded-lg p-6">

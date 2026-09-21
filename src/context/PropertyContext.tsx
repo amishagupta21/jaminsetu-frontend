@@ -1,8 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Property, FilterState, SellerFormData, FavoritesData, Review, Rating, KYCData, Booking, Negotiation, Document } from "@/types";
+import { Property, FilterState, SellerFormData, FavoritesData, Review, Rating, KYCData, Booking, Negotiation, Document, LandType, PropertyMetrics, MarketRate, SimilarProperty, PriceTrend } from "@/types";
 import { storageAdapter } from "@/lib/storage";
+import { calculateFairPrice, getMarketRate, getSimilarProperties, calculatePriceTrends, getPropertiesForMauza, comparePriceToMarket } from "@/utils/marketCalculations";
 
 interface PropertyContextType {
   properties: Property[];
@@ -40,6 +41,14 @@ interface PropertyContextType {
   // PHASE 2: Documents
   submitDocument: (propertyId: string, document: Document) => void;
   getPropertyDocuments: (propertyId: string) => Document[];
+  // PHASE 3: Market Intelligence
+  getMarketRate: (mauza: string, landType: LandType, roadType: string) => MarketRate;
+  calculateFairPrice: (specs: { mauza: string; landType: LandType; areaKatha: number; roadWidth: number; roadType: "Pakka" | "Soling" | "Kachha" }) => { lowEnd: number; fairValue: number; highEnd: number; confidence: "high" | "medium" | "low"; sampleSize: number };
+  getPropertyMetrics: (propertyId: string) => PropertyMetrics | undefined;
+  getSimilarProperties: (propertyId: string) => SimilarProperty[];
+  recordPropertyView: (propertyId: string) => void;
+  getPriceTrends: (mauza: string, landType: LandType) => PriceTrend[];
+  comparePriceToMarket: (marketRate: number, actualPrice: number) => { comparison: "underpriced" | "fair" | "overpriced"; percentDifference: number };
 }
 
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
@@ -50,6 +59,7 @@ const KYC_STORAGE_KEY = "jaminsetu_kyc";
 const BOOKINGS_STORAGE_KEY = "jaminsetu_bookings";
 const NEGOTIATIONS_STORAGE_KEY = "jaminsetu_negotiations";
 const DOCUMENTS_STORAGE_KEY = "jaminsetu_documents";
+const PROPERTY_METRICS_STORAGE_KEY = "jaminsetu_property_metrics";
 
 export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -70,6 +80,8 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [userBookings, setUserBookings] = useState<Booking[]>([]);
   const [userNegotiations, setUserNegotiations] = useState<Negotiation[]>([]);
   const [propertyDocuments, setPropertyDocuments] = useState<{ [key: string]: Document[] }>({});
+  // PHASE 3 State
+  const [propertyMetrics, setPropertyMetrics] = useState<{ [key: string]: PropertyMetrics }>({});
 
   useEffect(() => {
     storageAdapter.initialize();
@@ -134,6 +146,16 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
     } catch (e) {
       console.error("Failed to load documents:", e);
+    }
+
+    // PHASE 3: Load property metrics
+    try {
+      const savedMetrics = localStorage.getItem(PROPERTY_METRICS_STORAGE_KEY);
+      if (savedMetrics) {
+        setPropertyMetrics(JSON.parse(savedMetrics));
+      }
+    } catch (e) {
+      console.error("Failed to load property metrics:", e);
     }
 
     setIsLoading(false);
@@ -244,6 +266,29 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         ? prev.filter((id) => id !== propertyId)
         : [...prev, propertyId];
       localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(newFavorites));
+
+      // Update metrics
+      setPropertyMetrics((prevMetrics) => {
+        const metrics = prevMetrics[propertyId] || {
+          propertyId,
+          views: 0,
+          favorites: 0,
+          comparisons: 0,
+          reviewCount: 0,
+          trending: false,
+        };
+
+        const isFav = newFavorites.includes(propertyId);
+        const updatedMetrics = {
+          ...metrics,
+          favorites: isFav ? metrics.favorites + 1 : Math.max(0, metrics.favorites - 1),
+        };
+
+        const newMetricsState = { ...prevMetrics, [propertyId]: updatedMetrics };
+        localStorage.setItem(PROPERTY_METRICS_STORAGE_KEY, JSON.stringify(newMetricsState));
+        return newMetricsState;
+      });
+
       return newFavorites;
     });
   };
@@ -263,6 +308,29 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         newList = prev;
       }
       localStorage.setItem(COMPARISON_STORAGE_KEY, JSON.stringify(newList));
+
+      // Update metrics
+      setPropertyMetrics((prevMetrics) => {
+        const metrics = prevMetrics[propertyId] || {
+          propertyId,
+          views: 0,
+          favorites: 0,
+          comparisons: 0,
+          reviewCount: 0,
+          trending: false,
+        };
+
+        const isCompared = newList.includes(propertyId);
+        const updatedMetrics = {
+          ...metrics,
+          comparisons: isCompared ? metrics.comparisons + 1 : Math.max(0, metrics.comparisons - 1),
+        };
+
+        const newMetricsState = { ...prevMetrics, [propertyId]: updatedMetrics };
+        localStorage.setItem(PROPERTY_METRICS_STORAGE_KEY, JSON.stringify(newMetricsState));
+        return newMetricsState;
+      });
+
       return newList;
     });
   };
@@ -288,6 +356,28 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           const allReviews = [...reviews, newReview];
           const averageRating =
             allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length;
+
+          // Update metrics
+          setPropertyMetrics((prevMetrics) => {
+            const metrics = prevMetrics[propertyId] || {
+              propertyId,
+              views: 0,
+              favorites: 0,
+              comparisons: 0,
+              reviewCount: 0,
+              trending: false,
+            };
+
+            const updatedMetrics = {
+              ...metrics,
+              reviewCount: allReviews.length,
+              avgRating: Math.round(averageRating * 10) / 10,
+            };
+
+            const newMetricsState = { ...prevMetrics, [propertyId]: updatedMetrics };
+            localStorage.setItem(PROPERTY_METRICS_STORAGE_KEY, JSON.stringify(newMetricsState));
+            return newMetricsState;
+          });
 
           return {
             ...prop,
@@ -403,6 +493,56 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return propertyDocuments[propertyId] || [];
   };
 
+  // PHASE 3: Market Intelligence Methods
+  const marketGetMarketRate = (mauza: string, landType: LandType, roadType: string): MarketRate => {
+    return getMarketRate(properties, mauza, landType, roadType);
+  };
+
+  const marketCalculateFairPrice = (specs: { mauza: string; landType: LandType; areaKatha: number; roadWidth: number; roadType: "Pakka" | "Soling" | "Kachha" }) => {
+    return calculateFairPrice(properties, specs);
+  };
+
+  const getPropertyMetricsData = (propertyId: string): PropertyMetrics | undefined => {
+    return propertyMetrics[propertyId];
+  };
+
+  const getSimilarPropertiesData = (propertyId: string): SimilarProperty[] => {
+    const property = properties.find((p) => p.id === propertyId);
+    if (!property) return [];
+    return getSimilarProperties(properties, property);
+  };
+
+  const recordPropertyView = (propertyId: string) => {
+    setPropertyMetrics((prev) => {
+      const metrics = prev[propertyId] || {
+        propertyId,
+        views: 0,
+        favorites: 0,
+        comparisons: 0,
+        reviewCount: 0,
+        trending: false,
+      };
+
+      const updatedMetrics = {
+        ...metrics,
+        views: metrics.views + 1,
+        lastViewed: new Date().toISOString(),
+      };
+
+      const newMetricsState = { ...prev, [propertyId]: updatedMetrics };
+      localStorage.setItem(PROPERTY_METRICS_STORAGE_KEY, JSON.stringify(newMetricsState));
+      return newMetricsState;
+    });
+  };
+
+  const getPriceTrendsData = (mauza: string, landType: LandType): PriceTrend[] => {
+    return calculatePriceTrends(properties, mauza, landType);
+  };
+
+  const comparePriceToMarketData = (marketRate: number, actualPrice: number) => {
+    return comparePriceToMarket(marketRate, actualPrice);
+  };
+
   return (
     <PropertyContext.Provider
       value={{
@@ -435,6 +575,14 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         getPropertyNegotiations,
         submitDocument,
         getPropertyDocuments,
+        // PHASE 3
+        getMarketRate: marketGetMarketRate,
+        calculateFairPrice: marketCalculateFairPrice,
+        getPropertyMetrics: getPropertyMetricsData,
+        getSimilarProperties: getSimilarPropertiesData,
+        recordPropertyView,
+        getPriceTrends: getPriceTrendsData,
+        comparePriceToMarket: comparePriceToMarketData,
       }}
     >
       {children}

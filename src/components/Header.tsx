@@ -99,6 +99,21 @@ export const Header = () => {
                 </span>
               )}
             </Link>
+            {/* PHASE 3: Market Intelligence Links */}
+            <Link
+              href="/market-rates"
+              className="text-slate-300 hover:text-white transition flex items-center gap-1 hover:bg-slate-800 px-2 py-1 rounded transition text-sm font-medium hidden md:inline-flex"
+              title="Market Rates"
+            >
+              📊 Market
+            </Link>
+            <Link
+              href="/seller-dashboard"
+              className="text-slate-300 hover:text-white transition flex items-center gap-1 hover:bg-slate-800 px-2 py-1 rounded transition text-sm font-medium hidden md:inline-flex"
+              title="Seller Dashboard"
+            >
+              📈 Dashboard
+            </Link>
             <Link
               href="/list-land"
               className="flex items-center gap-1 bg-black hover:bg-slate-900 text-white px-3 sm:px-4 py-2 rounded-lg transition text-sm font-medium"

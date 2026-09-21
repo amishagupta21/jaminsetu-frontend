@@ -229,3 +229,44 @@ export interface Negotiation {
   response?: string;
   counterOfferPrice?: number;
 }
+
+// PHASE 3: Market Intelligence
+export interface PriceTrend {
+  mauza: string;
+  landType: LandType;
+  date: string; // YYYY-MM
+  avgPrice: number;
+  avgPricePerKatha: number;
+  minPrice: number;
+  maxPrice: number;
+  count: number; // number of properties in calculation
+}
+
+export interface MarketRate {
+  mauza: string;
+  landType: LandType;
+  roadType: string;
+  pricePerKatha: number;
+  confidence: "high" | "medium" | "low"; // based on count of properties
+  sampleSize: number;
+}
+
+export interface PropertyMetrics {
+  propertyId: string;
+  views: number;
+  favorites: number;
+  comparisons: number;
+  avgRating?: number;
+  reviewCount: number;
+  lastViewed?: string;
+  trending: boolean; // if views increased last 7 days
+}
+
+export interface SimilarProperty {
+  propertyId: string;
+  title: string;
+  price: number;
+  pricePerKatha: number;
+  similarity: number; // 0-100 score
+  reasons: string[]; // why it's similar
+}
