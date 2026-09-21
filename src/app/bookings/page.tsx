@@ -35,7 +35,7 @@ export default function BookingsPage() {
       case "paid":
         return "bg-green-50 border-green-200 text-green-900";
       case "refunded":
-        return "bg-blue-50 border-blue-200 text-blue-900";
+        return "bg-slate-50 border-slate-300 text-slate-900";
       default:
         return "bg-white border-slate-200 text-slate-900";
     }

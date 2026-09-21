@@ -56,11 +56,11 @@ export default function MarketRatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4">
+          <Link href="/" className="inline-flex items-center gap-2 text-black hover:text-slate-800 font-medium mb-4 transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7 7l-7-7 7-7" />
             </svg>
@@ -85,7 +85,7 @@ export default function MarketRatesPage() {
             <div className="bg-white rounded-lg shadow p-8 text-center">
               <p className="text-gray-600 mb-4">No villages with enough data yet</p>
               <p className="text-sm text-gray-500">Add more properties to see market trends</p>
-              <Link href="/list-land" className="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">
+              <Link href="/list-land" className="inline-block mt-4 bg-black hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium">
                 Add Property
               </Link>
             </div>
@@ -142,7 +142,7 @@ export default function MarketRatesPage() {
           ) : (
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+                <thead className="bg-slate-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Village</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Properties</th>
@@ -156,12 +156,12 @@ export default function MarketRatesPage() {
                     .filter((stat) => stat.count >= 3)
                     .sort((a, b) => b.count - a.count)
                     .map((stat) => (
-                      <tr key={stat.mauza} className="hover:bg-gray-50">
+                      <tr key={stat.mauza} className="hover:bg-slate-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className="font-semibold text-gray-900">{stat.mauza}</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="inline-block bg-slate-100 text-slate-900 px-3 py-1 rounded-full text-sm font-medium border border-slate-300">
                             {stat.count} properties
                           </span>
                         </td>
@@ -174,7 +174,7 @@ export default function MarketRatesPage() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <button
                             onClick={() => setSelectedMauza(stat.mauza)}
-                            className="text-blue-600 hover:text-blue-700 font-medium"
+                            className="text-black hover:text-slate-800 font-medium"
                           >
                             View Trends →
                           </button>

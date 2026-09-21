@@ -72,15 +72,15 @@ export default function SellerDocumentsPage() {
         </div>
 
         {/* Seller Info */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+        <div className="bg-white border border-slate-300 rounded-lg p-4 mb-8">
           <div className="flex items-start gap-3">
             <div className="text-3xl">🏠</div>
             <div>
-              <p className="font-semibold text-blue-900">Seller Account</p>
-              <p className="text-sm text-blue-800">
+              <p className="font-semibold text-slate-900">Seller Account</p>
+              <p className="text-sm text-slate-700">
                 Name: <span className="font-medium">{currentUserKYC.basicInfo.name}</span>
               </p>
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-slate-700">
                 Properties Listed: <span className="font-medium">{sellerProperties.length}</span>
               </p>
             </div>

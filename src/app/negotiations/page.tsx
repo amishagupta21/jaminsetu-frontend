@@ -39,7 +39,7 @@ export default function NegotiationsPage() {
       case "expired":
         return "bg-slate-100 text-slate-800";
       case "counter_offered":
-        return "bg-blue-100 text-blue-800";
+        return "bg-slate-100 text-slate-900";
       default:
         return "bg-slate-100 text-slate-800";
     }
@@ -227,12 +227,12 @@ export default function NegotiationsPage() {
                             </div>
                           )}
                           {neg.status === "counter_offered" && (
-                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                              <p className="text-sm text-blue-900 mb-2">
+                            <div className="bg-slate-50 border border-slate-300 rounded-lg p-4">
+                              <p className="text-sm text-slate-900 mb-2">
                                 <span className="font-semibold">↔ Counter Offer Received</span>
                               </p>
                               {neg.counterOfferPrice && (
-                                <p className="text-sm text-blue-900">
+                                <p className="text-sm text-slate-900">
                                   Seller's counter: <span className="font-bold">₹ {neg.counterOfferPrice.toLocaleString()}</span>
                                 </p>
                               )}
