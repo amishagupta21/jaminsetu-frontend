@@ -250,7 +250,7 @@ export const SellerForm = () => {
         {step < 4 ? (
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-6 py-2 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition"
+            className="flex items-center gap-2 px-6 py-2 rounded-lg bg-black text-white font-medium hover:bg-slate-900 transition"
           >
             Next
             <ChevronRight className="w-4 h-4" />
@@ -258,7 +258,7 @@ export const SellerForm = () => {
         ) : (
           <button
             onClick={handleSubmit}
-            className="flex items-center gap-2 px-6 py-2 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition"
+            className="flex items-center gap-2 px-6 py-2 rounded-lg bg-black text-white font-medium hover:bg-slate-900 transition"
           >
             <Check className="w-4 h-4" />
             List My Property

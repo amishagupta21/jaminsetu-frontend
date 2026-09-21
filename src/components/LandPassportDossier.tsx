@@ -17,7 +17,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
       {/* Main Content - 2/3 width */}
       <div className="lg:col-span-2 space-y-6">
         {/* Hero Gallery */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md">
+        <div className="bg-white rounded-lg overflow-hidden border border-slate-200">
           <div className="relative h-96 bg-gradient-to-br from-slate-200 to-slate-300">
             <img
               src={property.images[0]}
@@ -42,7 +42,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         </div>
 
         {/* Official Land Passport */}
-        <div className="bg-white rounded-lg border-2 border-slate-900 p-6 shadow-lg">
+        <div className="bg-white rounded-lg border-2 border-slate-900 p-6">
           <div className="text-center mb-6 pb-4 border-b-2 border-slate-200">
             <h2 className="text-2xl font-bold text-slate-900">OFFICIAL BIHAR LAND PASSPORT</h2>
             <p className="text-xs text-slate-600 mt-1">(Cross-referenced with Bihar Bhumi records)</p>
@@ -197,7 +197,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-lg transition flex items-center justify-center gap-2"
+          className="w-full bg-black hover:bg-slate-900 text-white font-bold py-4 px-4 rounded-lg transition flex items-center justify-center gap-2"
         >
           <MessageCircle className="w-5 h-5" />
           Inquire on WhatsApp
@@ -208,7 +208,7 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
           Request Site Visit
         </button>
 
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2">
+        <button className="w-full bg-black hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2">
           <Download className="w-5 h-5" />
           Print Land Dossier
         </button>

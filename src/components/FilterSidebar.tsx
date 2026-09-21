@@ -52,7 +52,7 @@ export const FilterSidebar = () => {
   };
 
   return (
-    <div className="w-full md:w-64 bg-white border-b md:border-r border-slate-200 p-4 space-y-6">
+    <div className="w-full md:w-64 bg-white border-b md:border-r border-slate-200 p-4 space-y-6 rounded-lg">
       <div>
         <h3 className="font-semibold text-slate-900 mb-3">Location (Anchal)</h3>
         <Select value={filters.anchal || "all"} onValueChange={handleAnchalChange}>

@@ -25,7 +25,7 @@ export const Header = () => {
             </Link>
             <Link
               href="/list-land"
-              className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition text-sm font-medium"
+              className="flex items-center gap-1 bg-black hover:bg-slate-900 text-white px-4 py-2 rounded-lg transition text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Sell Land

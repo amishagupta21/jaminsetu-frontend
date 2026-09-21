@@ -24,7 +24,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
 
   return (
     <Link href={`/property/${property.id}`}>
-      <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-slate-200">
+      <div className="bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-slate-300 transition-all">
         {/* Image Container */}
         <div className="relative h-56 bg-gradient-to-br from-slate-200 to-slate-300 overflow-hidden group">
           <img
@@ -104,7 +104,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             <button className="bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold py-2 px-3 rounded-lg transition text-sm">
               View Passport
             </button>
-            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3 rounded-lg transition text-sm">
+            <button className="bg-black hover:bg-slate-900 text-white font-semibold py-2 px-3 rounded-lg transition text-sm">
               WhatsApp
             </button>
           </div>
