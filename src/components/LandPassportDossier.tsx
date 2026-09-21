@@ -1,12 +1,15 @@
 "use client";
 
+import React, { useState } from "react";
 import { Property } from "@/types";
 import { VerificationStepper } from "./VerificationStepper";
 import { MapComponent } from "./MapComponent";
 import { AmenitiesSection } from "./AmenitiesSection";
 import { RatingDisplay } from "./RatingDisplay";
 import { RatingForm } from "./RatingForm";
-import { FileText, MapPin, Ruler, Download, MessageCircle, Calendar } from "lucide-react";
+import { BookingModal } from "./BookingModal";
+import { NegotiationModal } from "./NegotiationModal";
+import { FileText, MapPin, Ruler, Download, MessageCircle, Calendar, ShoppingCart, Zap } from "lucide-react";
 import { formatPrice, formatPriceDetailed, generateWhatsAppLink } from "@/utils/converters";
 
 interface LandPassportDossierProps {
@@ -14,6 +17,8 @@ interface LandPassportDossierProps {
 }
 
 export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ property }) => {
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showNegotiationModal, setShowNegotiationModal] = useState(false);
   const whatsappLink = generateWhatsAppLink(property);
 
   return (
@@ -229,6 +234,24 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         </div>
 
         {/* CTA Buttons */}
+        {/* PHASE 2: Book Now Button */}
+        <button
+          onClick={() => setShowBookingModal(true)}
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <ShoppingCart className="w-5 h-5" />
+          Book Property
+        </button>
+
+        {/* PHASE 2: Make Offer Button */}
+        <button
+          onClick={() => setShowNegotiationModal(true)}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <Zap className="w-5 h-5" />
+          Make an Offer
+        </button>
+
         <a
           href={whatsappLink}
           target="_blank"
@@ -268,6 +291,12 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
           </p>
         </div>
       </div>
+
+      {/* PHASE 2: Booking Modal */}
+      {showBookingModal && <BookingModal property={property} onClose={() => setShowBookingModal(false)} />}
+
+      {/* PHASE 2: Negotiation Modal */}
+      {showNegotiationModal && <NegotiationModal property={property} onClose={() => setShowNegotiationModal(false)} />}
     </div>
   );
 };

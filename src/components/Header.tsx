@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Plus, HelpCircle, Heart, Zap } from "lucide-react";
+import { MapPin, Plus, HelpCircle, Heart, Zap, Shield, FileCheck, BookOpen } from "lucide-react";
 import { useProperties } from "@/context/PropertyContext";
 
 export const Header = () => {
-  const { favorites, comparisonList } = useProperties();
+  const { favorites, comparisonList, currentUserKYC, userBookings, userNegotiations } = useProperties();
 
   return (
     <header className="bg-slate-900 text-white shadow-lg">
@@ -51,6 +51,51 @@ export const Header = () => {
               {comparisonList.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {comparisonList.length}
+                </span>
+              )}
+            </Link>
+
+            {/* PHASE 2: KYC Link */}
+            <Link
+              href="/kyc"
+              className={`relative text-slate-300 hover:text-white transition flex items-center gap-1 hover:bg-slate-800 px-2 py-1 rounded transition ${
+                currentUserKYC?.status === "verified" ? "text-green-400" : ""
+              }`}
+              title="KYC Verification"
+            >
+              <Shield className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">KYC</span>
+              {currentUserKYC?.status === "verified" && (
+                <span className="text-xs font-bold text-green-400">✓</span>
+              )}
+            </Link>
+
+            {/* PHASE 2: Bookings Link */}
+            <Link
+              href="/bookings"
+              className="relative text-slate-300 hover:text-white transition flex items-center gap-1 hover:bg-slate-800 px-2 py-1 rounded transition"
+              title="My Bookings"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">Bookings</span>
+              {userBookings.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-purple-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {userBookings.length}
+                </span>
+              )}
+            </Link>
+
+            {/* PHASE 2: Negotiations Link */}
+            <Link
+              href="/negotiations"
+              className="relative text-slate-300 hover:text-white transition flex items-center gap-1 hover:bg-slate-800 px-2 py-1 rounded transition"
+              title="My Offers"
+            >
+              <FileCheck className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">Offers</span>
+              {userNegotiations.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {userNegotiations.length}
                 </span>
               )}
             </Link>

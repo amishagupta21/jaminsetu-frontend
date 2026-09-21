@@ -73,6 +73,7 @@ export interface Property {
   sellerPhoneRaw: string; // hidden from UI
   sellerPhoneMasked: string; // displayed (e.g., "+91 98****3210")
   sellerCategory: "Individual" | "Broker" | "Developer";
+  sellerKYC?: KYCData; // PHASE 2: Seller's KYC data
 
   // Status
   status: "Available" | "Reserved" | "Sold";
@@ -82,6 +83,12 @@ export interface Property {
 
   // Nearby Amenities
   amenities?: Amenity[]; // NEW: Schools, hospitals, markets, etc.
+
+  // PHASE 2: Document Verification
+  documents?: Document[];
+
+  // PHASE 2: Bookings
+  bookings?: string[]; // Array of booking IDs
 
   // Metadata
   createdAt: string;
@@ -128,6 +135,9 @@ export interface SellerFormData {
   totalPrice: number;
   sellerName: string;
   sellerPhone: string;
+
+  // PHASE 2: KYC Consent
+  kycConsent?: boolean;
 }
 
 // NEW: Favorites/Wishlist

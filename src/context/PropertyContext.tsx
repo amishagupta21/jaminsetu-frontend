@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Property, FilterState, SellerFormData, FavoritesData, Review, Rating } from "@/types";
+import { Property, FilterState, SellerFormData, FavoritesData, Review, Rating, KYCData, Booking, Negotiation, Document } from "@/types";
 import { storageAdapter } from "@/lib/storage";
 
 interface PropertyContextType {
@@ -22,12 +22,34 @@ interface PropertyContextType {
   comparisonList: string[];
   toggleComparison: (propertyId: string) => void;
   clearComparison: () => void;
+  // PHASE 2: KYC
+  currentUserKYC: KYCData | null;
+  submitKYC: (data: KYCData) => void;
+  getKYCStatus: (userId: string) => KYCData | null;
+  canProceedToBooking: (userId: string) => boolean;
+  // PHASE 2: Bookings
+  userBookings: Booking[];
+  addBooking: (booking: Booking) => void;
+  getPropertyBookings: (propertyId: string) => Booking[];
+  cancelBooking: (bookingId: string) => void;
+  // PHASE 2: Negotiations
+  userNegotiations: Negotiation[];
+  addNegotiation: (negotiation: Negotiation) => void;
+  updateNegotiation: (negotiationId: string, updates: Partial<Negotiation>) => void;
+  getPropertyNegotiations: (propertyId: string) => Negotiation[];
+  // PHASE 2: Documents
+  submitDocument: (propertyId: string, document: Document) => void;
+  getPropertyDocuments: (propertyId: string) => Document[];
 }
 
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
 
 const FAVORITES_STORAGE_KEY = "jaminsetu_favorites";
 const COMPARISON_STORAGE_KEY = "jaminsetu_comparison";
+const KYC_STORAGE_KEY = "jaminsetu_kyc";
+const BOOKINGS_STORAGE_KEY = "jaminsetu_bookings";
+const NEGOTIATIONS_STORAGE_KEY = "jaminsetu_negotiations";
+const DOCUMENTS_STORAGE_KEY = "jaminsetu_documents";
 
 export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -43,6 +65,11 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     verifiedOnly: false,
     roadSurface: [],
   });
+  // PHASE 2 State
+  const [currentUserKYC, setCurrentUserKYC] = useState<KYCData | null>(null);
+  const [userBookings, setUserBookings] = useState<Booking[]>([]);
+  const [userNegotiations, setUserNegotiations] = useState<Negotiation[]>([]);
+  const [propertyDocuments, setPropertyDocuments] = useState<{ [key: string]: Document[] }>({});
 
   useEffect(() => {
     storageAdapter.initialize();
@@ -67,6 +94,46 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
     } catch (e) {
       console.error("Failed to load comparison list:", e);
+    }
+
+    // PHASE 2: Load KYC data
+    try {
+      const savedKYC = localStorage.getItem(KYC_STORAGE_KEY);
+      if (savedKYC) {
+        setCurrentUserKYC(JSON.parse(savedKYC));
+      }
+    } catch (e) {
+      console.error("Failed to load KYC data:", e);
+    }
+
+    // PHASE 2: Load bookings
+    try {
+      const savedBookings = localStorage.getItem(BOOKINGS_STORAGE_KEY);
+      if (savedBookings) {
+        setUserBookings(JSON.parse(savedBookings));
+      }
+    } catch (e) {
+      console.error("Failed to load bookings:", e);
+    }
+
+    // PHASE 2: Load negotiations
+    try {
+      const savedNegotiations = localStorage.getItem(NEGOTIATIONS_STORAGE_KEY);
+      if (savedNegotiations) {
+        setUserNegotiations(JSON.parse(savedNegotiations));
+      }
+    } catch (e) {
+      console.error("Failed to load negotiations:", e);
+    }
+
+    // PHASE 2: Load documents
+    try {
+      const savedDocuments = localStorage.getItem(DOCUMENTS_STORAGE_KEY);
+      if (savedDocuments) {
+        setPropertyDocuments(JSON.parse(savedDocuments));
+      }
+    } catch (e) {
+      console.error("Failed to load documents:", e);
     }
 
     setIsLoading(false);
@@ -240,6 +307,102 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return properties.find((p) => p.id === propertyId)?.rating;
   };
 
+  // PHASE 2: KYC Methods
+  const submitKYC = (data: KYCData) => {
+    setCurrentUserKYC(data);
+    localStorage.setItem(KYC_STORAGE_KEY, JSON.stringify(data));
+  };
+
+  const getKYCStatus = (userId: string) => {
+    if (currentUserKYC?.userId === userId) {
+      return currentUserKYC;
+    }
+    return null;
+  };
+
+  const canProceedToBooking = (userId: string) => {
+    if (!currentUserKYC || currentUserKYC.userId !== userId) {
+      return false;
+    }
+    return currentUserKYC.status === "verified" && currentUserKYC.tier === "complete";
+  };
+
+  // PHASE 2: Booking Methods
+  const addBooking = (booking: Booking) => {
+    const newBookings = [...userBookings, booking];
+    setUserBookings(newBookings);
+    localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(newBookings));
+
+    // Add booking ID to property's bookings array
+    setProperties((prev) =>
+      prev.map((p) => {
+        if (p.id === booking.propertyId) {
+          return {
+            ...p,
+            bookings: [...(p.bookings || []), booking.id],
+          };
+        }
+        return p;
+      })
+    );
+  };
+
+  const getPropertyBookings = (propertyId: string) => {
+    return userBookings.filter((b) => b.propertyId === propertyId);
+  };
+
+  const cancelBooking = (bookingId: string) => {
+    const updatedBookings = userBookings.map((b) =>
+      b.id === bookingId ? { ...b, status: "cancelled" as const } : b
+    );
+    setUserBookings(updatedBookings);
+    localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(updatedBookings));
+  };
+
+  // PHASE 2: Negotiation Methods
+  const addNegotiation = (negotiation: Negotiation) => {
+    const newNegotiations = [...userNegotiations, negotiation];
+    setUserNegotiations(newNegotiations);
+    localStorage.setItem(NEGOTIATIONS_STORAGE_KEY, JSON.stringify(newNegotiations));
+  };
+
+  const updateNegotiation = (negotiationId: string, updates: Partial<Negotiation>) => {
+    const updatedNegotiations = userNegotiations.map((n) =>
+      n.id === negotiationId ? { ...n, ...updates } : n
+    );
+    setUserNegotiations(updatedNegotiations);
+    localStorage.setItem(NEGOTIATIONS_STORAGE_KEY, JSON.stringify(updatedNegotiations));
+  };
+
+  const getPropertyNegotiations = (propertyId: string) => {
+    return userNegotiations.filter((n) => n.propertyId === propertyId);
+  };
+
+  // PHASE 2: Document Methods
+  const submitDocument = (propertyId: string, document: Document) => {
+    const docs = propertyDocuments[propertyId] || [];
+    const updatedDocs = { ...propertyDocuments, [propertyId]: [...docs, document] };
+    setPropertyDocuments(updatedDocs);
+    localStorage.setItem(DOCUMENTS_STORAGE_KEY, JSON.stringify(updatedDocs));
+
+    // Add document to property
+    setProperties((prev) =>
+      prev.map((p) => {
+        if (p.id === propertyId) {
+          return {
+            ...p,
+            documents: [...(p.documents || []), document],
+          };
+        }
+        return p;
+      })
+    );
+  };
+
+  const getPropertyDocuments = (propertyId: string) => {
+    return propertyDocuments[propertyId] || [];
+  };
+
   return (
     <PropertyContext.Provider
       value={{
@@ -257,6 +420,21 @@ export const PropertyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         comparisonList,
         toggleComparison,
         clearComparison,
+        // PHASE 2
+        currentUserKYC,
+        submitKYC,
+        getKYCStatus,
+        canProceedToBooking,
+        userBookings,
+        addBooking,
+        getPropertyBookings,
+        cancelBooking,
+        userNegotiations,
+        addNegotiation,
+        updateNegotiation,
+        getPropertyNegotiations,
+        submitDocument,
+        getPropertyDocuments,
       }}
     >
       {children}

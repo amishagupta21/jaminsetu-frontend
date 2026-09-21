@@ -106,7 +106,7 @@ export const SellerForm = () => {
       </label>
       <input
         type={type}
-        value={formData[field as keyof SellerFormData]}
+        value={String(formData[field as keyof SellerFormData] || "")}
         onChange={(e) => handleInputChange(field, e.target.value)}
         className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-600 focus:outline-none ${
           errors[field] ? "border-red-500" : "border-slate-300"
@@ -123,7 +123,7 @@ export const SellerForm = () => {
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
-        value={formData[field as keyof SellerFormData]}
+        value={String(formData[field as keyof SellerFormData] || "")}
         onChange={(e) => handleInputChange(field, e.target.value)}
         className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-600 focus:outline-none ${
           errors[field] ? "border-red-500" : "border-slate-300"

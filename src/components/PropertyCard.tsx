@@ -99,6 +99,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property, showCompar
             </div>
           )}
 
+          {/* PHASE 2: Seller KYC Badge */}
+          {property.sellerKYC && property.sellerKYC.status === "verified" && (
+            <div className="flex gap-2">
+              <span className="inline-block bg-green-50 text-green-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+                <span>✓</span>
+                Verified Seller
+              </span>
+            </div>
+          )}
+
           {/* Pricing */}
           <div className="bg-slate-100 rounded-lg p-3 space-y-1 border border-slate-300">
             <div className="text-2xl font-bold text-slate-900">{formatPrice(property.totalPrice)}</div>
