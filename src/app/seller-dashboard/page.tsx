@@ -251,31 +251,31 @@ export default function SellerDashboardPage() {
 
         {/* Tips Section */}
         {listedProperties.length > 0 && (
-          <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Tips to Improve Your Listings</h3>
-            <ul className="space-y-2 text-gray-700">
+          <div className="mt-8 bg-white border border-slate-200 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-slate-900 mb-4">Tips to Improve Your Listings</h3>
+            <ul className="space-y-2 text-slate-700">
               <li className="flex gap-3">
-                <span className="text-blue-600 font-bold">1.</span>
+                <span className="text-black font-bold">1.</span>
                 <span>Add high-quality images to increase views by up to 50%</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-blue-600 font-bold">2.</span>
+                <span className="text-black font-bold">2.</span>
                 <span>Complete KYC verification to boost buyer confidence</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-blue-600 font-bold">3.</span>
+                <span className="text-black font-bold">3.</span>
                 <span>Properties with 40+ views are more likely to sell</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-blue-600 font-bold">4.</span>
+                <span className="text-black font-bold">4.</span>
                 <span>Check market rates to price competitively</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-blue-600 font-bold">5.</span>
+                <span className="text-black font-bold">5.</span>
                 <span>Respond quickly to buyer inquiries to maintain interest</span>
               </li>
             </ul>
-            <Link href="/market-rates" className="inline-block mt-4 text-blue-600 hover:text-blue-700 font-medium">
+            <Link href="/market-rates" className="inline-block mt-4 text-black hover:text-slate-800 font-medium">
               Check Market Rates →
             </Link>
           </div>

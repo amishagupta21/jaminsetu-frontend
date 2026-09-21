@@ -5,6 +5,7 @@ import { useProperties } from "@/context/PropertyContext";
 import { KYCStatus } from "@/components/KYCStatus";
 import { TransactionTimeline } from "@/components/TransactionTimeline";
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 export default function BookingsPage() {
   const { userBookings, properties, currentUserKYC, getPropertyNegotiations } = useProperties();
@@ -67,6 +68,15 @@ export default function BookingsPage() {
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Back Button */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-black hover:text-slate-800 font-medium mb-6 transition"
+        >
+          <ChevronLeft className="w-4 h-4" />
+          Back to Home
+        </Link>
+
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900 mb-2">My Bookings</h1>

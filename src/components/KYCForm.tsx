@@ -320,7 +320,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({ onSubmit, initialData }) => {
         <button
           onClick={() => setStep((s) => (s > 1 ? (s - 1 as any) : s))}
           disabled={step === 1}
-          className="px-6 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 bg-black text-white rounded-lg hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Previous
         </button>
@@ -331,7 +331,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({ onSubmit, initialData }) => {
               if (step === 2 && isStep2Valid) setStep(3);
             }}
             disabled={step === 1 ? !isStep1Valid : !isStep2Valid}
-            className="flex-1 px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 px-6 py-2 bg-black text-white rounded-lg hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Next
           </button>
@@ -339,7 +339,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({ onSubmit, initialData }) => {
           <button
             onClick={handleSubmit}
             disabled={!isStep3Valid}
-            className="flex-1 px-6 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 px-6 py-2 bg-black text-white rounded-lg hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Complete KYC
           </button>
