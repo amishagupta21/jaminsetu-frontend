@@ -140,3 +140,82 @@ export interface FavoritesData {
 export interface ComparisonState {
   selectedProperties: string[]; // Max 3 property IDs
 }
+
+// PHASE 2: Document Verification
+export interface Document {
+  id: string;
+  name: string;
+  type:
+    | "DeedCertificate"
+    | "KhataCertificate"
+    | "JamabandExtract"
+    | "TaxReceipts"
+    | "EncumbranceCertificate"
+    | "NOCFromAuthorities";
+  status: "pending" | "verified" | "rejected";
+  uploadedAt: string;
+  verifiedAt?: string;
+  feedback?: string;
+  documentUrl?: string; // base64 or file URL
+}
+
+// PHASE 2: KYC Data
+export interface IdentityProof {
+  type: "aadhar" | "pan" | "passport";
+  value: string;
+  documentUrl?: string; // base64 or URL
+}
+
+export interface AddressProof {
+  type: "bank_statement" | "utility_bill" | "passport";
+  documentUrl?: string; // base64 or URL
+}
+
+export interface KYCData {
+  userId: string;
+  tier: "basic" | "intermediate" | "complete";
+  basicInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+  };
+  identityProof?: IdentityProof;
+  addressProof?: AddressProof;
+  verifiedAt?: string;
+  status: "pending" | "verified" | "rejected";
+  rejectionReason?: string;
+}
+
+// PHASE 2: Booking
+export interface Booking {
+  id: string;
+  propertyId: string;
+  buyerId: string;
+  amount: number;
+  holdingDeposit: number;
+  depositStatus: "pending" | "paid" | "refunded";
+  depositPaidAt?: string;
+  paymentMethod?: "bank_transfer" | "upi" | "check";
+  status: "pending" | "confirmed" | "cancelled";
+  createdAt: string;
+  possessionDate?: string;
+  termsAccepted: boolean;
+}
+
+// PHASE 2: Negotiation
+export interface Negotiation {
+  id: string;
+  propertyId: string;
+  buyerId: string;
+  sellerId: string;
+  askingPrice: number;
+  offeredPrice: number;
+  message?: string;
+  status: "pending" | "accepted" | "rejected" | "expired" | "counter_offered";
+  validUntil: string;
+  createdAt: string;
+  respondedAt?: string;
+  response?: string;
+  counterOfferPrice?: number;
+}
