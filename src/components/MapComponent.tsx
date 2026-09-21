@@ -99,7 +99,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
   if (!coordinates) {
     return (
-      <div className={height + " bg-slate-100 rounded-lg border border-slate-200 flex items-center justify-center"}>
+      <div className={height + " bg-white rounded-lg border border-slate-200 flex items-center justify-center"}>
         <div className="text-center">
           <MapPin className="w-8 h-8 text-slate-400 mx-auto mb-2" />
           <p className="text-slate-600">Location coordinates not available</p>

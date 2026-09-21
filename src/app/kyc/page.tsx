@@ -5,10 +5,35 @@ import { KYCForm } from "@/components/KYCForm";
 import { KYCStatus } from "@/components/KYCStatus";
 import { useProperties } from "@/context/PropertyContext";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
 export default function KYCPage() {
   const { currentUserKYC } = useProperties();
   const [showForm, setShowForm] = useState(!currentUserKYC);
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "Why do I need to complete KYC?",
+      answer: "KYC verification helps us prevent fraud, comply with regulations, and build trust between buyers and sellers on the platform."
+    },
+    {
+      question: "What documents do I need?",
+      answer: "You need basic information (name, email, phone), an identity proof (Aadhar, PAN, or Passport), and an address proof (bank statement or utility bill)."
+    },
+    {
+      question: "Is my data safe?",
+      answer: "Yes. All data is encrypted, stored securely, and never shared with third parties without your consent. We comply with all data protection laws."
+    },
+    {
+      question: "Can I edit my information after verification?",
+      answer: "Yes. You can update your information anytime, but major changes may require re-verification."
+    },
+    {
+      question: "What if my KYC is rejected?",
+      answer: "If rejected, we'll provide specific reasons. You can correct the issues and resubmit. Contact our support team if you need help."
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
@@ -30,7 +55,7 @@ export default function KYCPage() {
 
         {/* KYC Form */}
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="bg-white rounded-lg border border-slate-200 p-8">
             <KYCForm
               initialData={currentUserKYC || undefined}
               onSubmit={() => {
@@ -42,7 +67,7 @@ export default function KYCPage() {
 
         {/* Status View */}
         {!showForm && currentUserKYC && (
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="bg-white rounded-lg border border-slate-200 p-8">
             <div className="text-center space-y-6">
               <div className="text-6xl">✓</div>
               <div>
@@ -120,44 +145,30 @@ export default function KYCPage() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-12 bg-white rounded-lg shadow-md p-8">
+        <div className="mt-12 bg-white rounded-lg border border-slate-200 p-8">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
 
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-2">Why do I need to complete KYC?</h3>
-              <p className="text-slate-600 text-sm">
-                KYC verification helps us prevent fraud, comply with regulations, and build trust between buyers and sellers on the platform.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-2">What documents do I need?</h3>
-              <p className="text-slate-600 text-sm">
-                You need basic information (name, email, phone), an identity proof (Aadhar, PAN, or Passport), and an address proof (bank statement or utility bill).
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-2">Is my data safe?</h3>
-              <p className="text-slate-600 text-sm">
-                Yes. All data is encrypted, stored securely, and never shared with third parties without your consent. We comply with all data protection laws.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-2">Can I edit my information after verification?</h3>
-              <p className="text-slate-600 text-sm">
-                Yes. You can update your information anytime, but major changes may require re-verification.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-2">What if my KYC is rejected?</h3>
-              <p className="text-slate-600 text-sm">
-                If rejected, we'll provide specific reasons. You can correct the issues and resubmit. Contact our support team if you need help.
-              </p>
-            </div>
+          <div className="space-y-3">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border border-slate-200 rounded-lg">
+                <button
+                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                  className="w-full flex items-center justify-between p-4 hover:bg-slate-50 transition"
+                >
+                  <h3 className="font-semibold text-slate-900 text-left">{faq.question}</h3>
+                  <ChevronDown
+                    className={`w-5 h-5 text-slate-600 transition-transform flex-shrink-0 ml-2 ${
+                      expandedFAQ === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {expandedFAQ === index && (
+                  <div className="px-4 pb-4 border-t border-slate-200">
+                    <p className="text-slate-600 text-sm mt-3">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
