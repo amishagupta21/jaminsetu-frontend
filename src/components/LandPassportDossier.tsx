@@ -143,12 +143,12 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
       {/* Right Sidebar - 1/3 width */}
       <div className="space-y-4">
         {/* Price Card */}
-        <div className="bg-emerald-50 border-2 border-emerald-600 rounded-lg p-6">
-          <div className="text-sm text-emerald-700 font-semibold">ASKING PRICE</div>
+        <div className="bg-slate-50 border-2 border-slate-700 rounded-lg p-6">
+          <div className="text-sm text-slate-700 font-semibold">ASKING PRICE</div>
           <div className="text-4xl font-bold text-slate-900 mt-2">{formatPrice(property.totalPrice)}</div>
-          <div className="mt-4 pt-4 border-t border-emerald-200">
+          <div className="mt-4 pt-4 border-t border-slate-200">
             <div className="text-sm text-slate-600">Per Katha</div>
-            <div className="text-2xl font-bold text-emerald-700">{formatPrice(property.pricePerKatha)}</div>
+            <div className="text-2xl font-bold text-slate-900">{formatPrice(property.pricePerKatha)}</div>
           </div>
           <div className="mt-4 pt-4 border-t border-emerald-200 text-sm">
             <div className="text-slate-600">Area: {property.areaKatha} Katha ({property.areaDecimal} Dec)</div>
@@ -157,11 +157,11 @@ export const LandPassportDossier: React.FC<LandPassportDossierProps> = ({ proper
         </div>
 
         {/* Verification Badge */}
-        <div className={`rounded-lg p-6 ${property.verificationTier >= 3 ? "bg-emerald-50 border-2 border-emerald-600" : "bg-blue-50 border-2 border-blue-600"}`}>
-          <div className={`text-2xl font-bold ${property.verificationTier >= 3 ? "text-emerald-700" : "text-blue-700"}`}>
-            🟢 TIER {property.verificationTier}
+        <div className={`rounded-lg p-6 ${property.verificationTier >= 3 ? "bg-slate-50 border-2 border-slate-700" : "bg-slate-100 border-2 border-slate-600"}`}>
+          <div className={`text-2xl font-bold ${property.verificationTier >= 3 ? "text-slate-800" : "text-slate-700"}`}>
+            ⚫ TIER {property.verificationTier}
           </div>
-          <div className={`text-sm font-semibold mt-2 ${property.verificationTier >= 3 ? "text-emerald-700" : "text-blue-700"}`}>
+          <div className={`text-sm font-semibold mt-2 ${property.verificationTier >= 3 ? "text-slate-800" : "text-slate-700"}`}>
             {property.verificationTier === 1 && "Pending Verification"}
             {property.verificationTier === 2 && "In Progress"}
             {property.verificationTier === 3 && "Site & Mutation Verified"}

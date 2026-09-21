@@ -12,10 +12,10 @@ interface PropertyCardProps {
 export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
   const getTierBadge = (tier: number) => {
     const tiers = {
-      1: { label: "Tier 1: Pending", color: "bg-amber-100 text-amber-800" },
-      2: { label: "Tier 2: In Progress", color: "bg-blue-100 text-blue-800" },
-      3: { label: "Tier 3: Verified", color: "bg-emerald-100 text-emerald-800" },
-      4: { label: "Tier 4: Full Search", color: "bg-indigo-100 text-indigo-800" },
+      1: { label: "Tier 1: Pending", color: "bg-slate-200 text-slate-800" },
+      2: { label: "Tier 2: In Progress", color: "bg-slate-300 text-slate-900" },
+      3: { label: "Tier 3: Verified", color: "bg-slate-400 text-slate-900" },
+      4: { label: "Tier 4: Full Search", color: "bg-slate-500 text-white" },
     };
     return tiers[tier as keyof typeof tiers];
   };
@@ -61,7 +61,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           </div>
 
           {/* Pricing */}
-          <div className="bg-emerald-50 rounded-lg p-3 space-y-1">
+          <div className="bg-slate-100 rounded-lg p-3 space-y-1 border border-slate-300">
             <div className="text-2xl font-bold text-slate-900">{formatPrice(property.totalPrice)}</div>
             <div className="text-sm text-slate-600">
               {formatPrice(property.pricePerKatha)} / Katha

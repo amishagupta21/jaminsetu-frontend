@@ -45,15 +45,15 @@ export const VerificationStepper: React.FC<VerificationStepperProps> = ({ proper
             <div className="flex flex-col items-center">
               <div>
                 {step.completed ? (
-                  <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+                  <CheckCircle2 className="w-8 h-8 text-slate-800" />
                 ) : index <= 2 ? (
-                  <AlertCircle className="w-8 h-8 text-amber-600" />
+                  <AlertCircle className="w-8 h-8 text-slate-500" />
                 ) : (
                   <Circle className="w-8 h-8 text-slate-300" />
                 )}
               </div>
               {index < steps.length - 1 && (
-                <div className={`w-0.5 h-12 my-1 ${step.completed ? "bg-emerald-600" : "bg-slate-200"}`} />
+                <div className={`w-0.5 h-12 my-1 ${step.completed ? "bg-slate-800" : "bg-slate-200"}`} />
               )}
             </div>
 
@@ -63,7 +63,7 @@ export const VerificationStepper: React.FC<VerificationStepperProps> = ({ proper
                 <h4 className="font-semibold text-slate-900">
                   Level {step.level}: {step.title}
                 </h4>
-                {step.completed && <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">✓</span>}
+                {step.completed && <span className="text-xs bg-slate-200 text-slate-800 px-2 py-0.5 rounded">✓</span>}
               </div>
               <p className="text-sm text-slate-600 mt-1">{step.description}</p>
             </div>
@@ -82,8 +82,8 @@ export const VerificationStepper: React.FC<VerificationStepperProps> = ({ proper
           </div>
           {property.verificationTier >= 3 && (
             <div className="text-right">
-              <p className="text-xs text-emerald-600 font-semibold">TRUSTED</p>
-              <p className="text-2xl">🟢</p>
+              <p className="text-xs text-slate-800 font-semibold">VERIFIED</p>
+              <p className="text-2xl">⚫</p>
             </div>
           )}
         </div>

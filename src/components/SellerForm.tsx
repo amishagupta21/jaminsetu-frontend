@@ -225,7 +225,7 @@ export const SellerForm = () => {
             {renderField("Asking Price (₹)", "totalPrice", "number")}
             {renderField("Your Name", "sellerName")}
             {renderField("Phone Number (+91...)", "sellerPhone")}
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-sm text-emerald-800">
+            <div className="bg-slate-100 border border-slate-300 rounded-lg p-4 text-sm text-slate-800">
               <p className="font-semibold mb-1">📋 Verification Note</p>
               <p>
                 Your property will start at Tier 1 verification. After submitting, our team will contact you

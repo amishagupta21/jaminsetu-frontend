@@ -51,7 +51,7 @@ export default function ListLandPage() {
         <SellerForm />
 
         {/* Footer Note */}
-        <div className="mt-10 bg-blue-50 border border-blue-200 rounded-lg p-6 text-sm text-blue-800">
+        <div className="mt-10 bg-slate-100 border border-slate-300 rounded-lg p-6 text-sm text-slate-800">
           <p className="font-semibold mb-2">📋 After Listing:</p>
           <ul className="space-y-1 text-sm">
             <li>• Our team will contact you within 24 hours</li>

@@ -7,7 +7,7 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition">
-            <div className="bg-emerald-600 p-2 rounded-lg">
+            <div className="bg-slate-800 p-2 rounded-lg">
               <MapPin className="w-6 h-6" />
             </div>
             <div>
